@@ -1,0 +1,186 @@
+name: bastion
+label: Bastion
+description: >
+  Military ops aesthetic. Topographic olive-green palette with warm cream text
+  and terracotta accent. Earthy, serious, high-contrast command center.
+
+# ─── Palette ──────────────────────────────────────────────────────────────────
+# Background = void black, midground = warm cream primary text,
+# foreground = terracotta accent layer
+palette:
+  background:
+    hex: "#040302"    # near-void black
+    alpha: 1.0
+  midground: "#C5BE94"  # warm cream — primary text & chrome
+  foreground:
+    hex: "#B26948"    # terracotta — top-layer accent
+    alpha: 0.10       # subtle base; pinned explicitly in colorOverrides
+  warmGlow: "rgba(178, 105, 72, 0.14)"   # warm terracotta vignette
+  noiseOpacity: 0.55   # slightly grittier grain — field ops texture
+
+# ─── Typography ───────────────────────────────────────────────────────────────
+typography:
+  fontSans: '"DM Sans", "Inter", system-ui, sans-serif'
+  fontMono: '"IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace'
+  fontDisplay: '"DM Sans", system-ui, sans-serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+  baseSize: "14px"
+  lineHeight: "1.55"
+  letterSpacing: "-0.005em"
+
+# ─── Layout ───────────────────────────────────────────────────────────────────
+layout:
+  radius: "0.25rem"    # tight but not zero — subtle bevel
+  density: compact
+
+layoutVariant: standard
+
+# ─── Color overrides ──────────────────────────────────────────────────────────
+colorOverrides:
+  primary: "#B26948"            # terracotta CTA
+  primaryForeground: "#040302"
+  accent: "#B26948"
+  accentForeground: "#040302"
+  ring: "#B26948"
+  success: "#9FAE97"            # sage green — positive/operational
+  warning: "#C5BE94"            # cream warning
+  destructive: "#B26948"        # terracotta doubles as destructive
+  destructiveForeground: "#040302"
+  border: "rgba(79, 90, 66, 0.65)"      # #4F5A42 — olive divider
+  input: "rgba(44, 54, 33, 0.80)"       # #2C3621 card-level elevation
+  muted: "rgba(24, 29, 17, 0.90)"       # #181D11 deep panel
+  mutedForeground: "#839177"            # #839177 muted/secondary text
+  card: "#181D11"
+  cardForeground: "#C5BE94"
+  secondary: "#2C3621"
+  secondaryForeground: "#9FAE97"
+
+# ─── Component chrome ─────────────────────────────────────────────────────────
+componentStyles:
+  card:
+    background: "linear-gradient(160deg, rgba(44, 54, 33, 0.92), rgba(24, 29, 17, 0.97))"
+    boxShadow: "inset 0 0 0 1px rgba(79, 90, 66, 0.55), 0 4px 20px rgba(4, 3, 2, 0.7)"
+  header:
+    background: "linear-gradient(180deg, rgba(24, 29, 17, 0.99), rgba(10, 13, 8, 0.98))"
+    boxShadow: "0 1px 0 rgba(79, 90, 66, 0.45)"
+  sidebar:
+    background: "linear-gradient(180deg, rgba(24, 29, 17, 0.99), rgba(10, 13, 8, 0.98))"
+    boxShadow: "1px 0 0 rgba(79, 90, 66, 0.40)"
+  tab:
+    clipPath: "polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)"
+  backdrop: {}
+  badge: {}
+  progress:
+    background: "rgba(44, 54, 33, 0.80)"
+  footer:
+    background: "rgba(10, 13, 8, 0.98)"
+    boxShadow: "0 -1px 0 rgba(79, 90, 66, 0.35)"
+
+# ─── Custom CSS ───────────────────────────────────────────────────────────────
+customCSS: |
+  /* ── Topographic noise overlay — terrain grid texture ─────────────────── */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(197, 190, 148, 0.012) 4px,
+        rgba(197, 190, 148, 0.012) 5px
+      ),
+      repeating-linear-gradient(
+        to right,
+        transparent 0px,
+        transparent 40px,
+        rgba(79, 90, 66, 0.04) 41px,
+        rgba(79, 90, 66, 0.04) 42px
+      );
+    mix-blend-mode: screen;
+  }
+
+  /* ── Nav active item: terracotta left bar ──────────────────────────────── */
+  [data-active="true"],
+  .nav-item[aria-current="page"] {
+    border-left: 2px solid #B26948;
+    padding-left: calc(0.75rem - 2px);
+    background: rgba(178, 105, 72, 0.08);
+  }
+
+  /* ── Chart bars: dual-tone INPUT=sage OUTPUT=cream ─────────────────────── */
+  /* Chart will derive from theme colors — override washed beige explicitly */
+  .recharts-bar-rectangle path,
+  [class*="bar-"] rect {
+    opacity: 0.9;
+  }
+
+  /* ── Table cost / positive values: sage operational green ─────────────── */
+  td[data-col="cost"],
+  .cost-value {
+    color: #9FAE97 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Stat numbers: warm cream highlight ───────────────────────────────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"] {
+    color: #DFDCC3 !important;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Card headings ────────────────────────────────────────────────────── */
+  .card-title,
+  [class*="CardTitle"] {
+    color: #DFDCC3;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  /* ── Trend lines / sparklines: terracotta ─────────────────────────────── */
+  .recharts-line path,
+  [class*="sparkline"] path,
+  [class*="trend"] path {
+    stroke: #B26948 !important;
+  }
+
+  /* ── Focus rings: terracotta ──────────────────────────────────────────── */
+  *:focus-visible {
+    outline: 1.5px solid #B26948;
+    outline-offset: 2px;
+  }
+
+  /* ── Scrollbar: olive thin ────────────────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(79, 90, 66, 0.60);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(197, 190, 148, 0.40);
+  }
+
+  /* ── Badge live pulse: terracotta ─────────────────────────────────────── */
+  .live-badge,
+  [class*="pulsing"] {
+    background: #B26948 !important;
+    box-shadow: 0 0 6px rgba(178, 105, 72, 0.6);
+  }
+
+  /* ── Selection highlight ──────────────────────────────────────────────── */
+  ::selection {
+    background: rgba(178, 105, 72, 0.30);
+    color: #DFDCC3;
+  }
