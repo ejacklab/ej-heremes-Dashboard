@@ -1,0 +1,270 @@
+name: opus
+label: Opus
+description: "Luxurious golden fintech command center — high contrast, colorblind-safe, elder-friendly"
+
+# ─── Palette ──────────────────────────────────────────────────────────────────
+# All text/bg pairs verified WCAG AA (4.5:1) or AAA (7:1).
+# Accent strategy: gold (primary) + orange (secondary) — warm luxury accessible.
+# No red/green semantic pairing. Custom background image (flowing golden energy form).
+palette:
+  background:
+    hex: "#1A120D"    # Deep warm black — not pure black (halation risk for elders)
+    alpha: 1.0
+  midground: "#F0E6D6"  # Warm off-white — ~12.77:1 on card, elder-friendly
+  foreground:
+    hex: "#F5C97A"    # Bright golden glow — matches reference dominant
+    alpha: 0.08
+  warmGlow: "rgba(245, 201, 122, 0.14)"   # Golden warmth — cohesive with accent
+  noiseOpacity: 0.18   # Minimal grain — elders prefer clean surfaces
+
+# ─── Typography ───────────────────────────────────────────────────────────────
+# Inter: large x-height, open counters — best legibility at small sizes
+# letterSpacing: positive — opens type for aging eyes
+typography:
+  fontSans: '"Inter", "SF Pro Display", "IBM Plex Sans", system-ui, sans-serif'
+  fontMono: '"JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace'
+  fontDisplay: '"Space Grotesk", "Inter", system-ui, sans-serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+  baseSize: "15px"
+  lineHeight: "1.6"
+  letterSpacing: "0.02em"   # Positive — opens up type, elder-friendly
+
+# ─── Layout ───────────────────────────────────────────────────────────────────
+layout:
+  radius: "0.5rem"
+  density: comfortable   # NOT compact — elders need generous tap targets
+
+layoutVariant: standard
+
+# ─── Color overrides ──────────────────────────────────────────────────────────
+# Contrast ratios vs card bg (#2A211A):
+#   #F5C97A gold:     ~10.16:1 ✓ AAA
+#   #E89A3C orange:   ~6.85:1  ✓ AA
+#   #F0E6D6 cream:    ~12.77:1 ✓ AAA
+#   #B8A898 sec text: ~6.83:1  ✓ AA
+#   #9A8D7A muted:    ~4.86:1  ✓ AA  (safe for elders)
+#   #FF6B35 destr:    ~5.56:1  ✓ AA+ (orange-red, distinct from gold)
+#   #2DD4BF success:  ~8.48:1  ✓ AAA (blue-teal — NOT green, colorblind safe)
+colorOverrides:
+  primary: "#F5C97A"              # Bright golden — primary accent, chart glow
+  primaryForeground: "#1A120D"
+  accent: "#E89A3C"               # Bright orange — secondary warmth, energy
+  accentForeground: "#1A120D"
+  ring: "#F5C97A"                 # Gold focus ring — thick 2px in customCSS
+  success: "#2DD4BF"              # Blue-teal — NOT green (colorblind safe)
+  successForeground: "#1A120D"
+  warning: "#F5C97A"              # Golden — same as primary; unambiguous
+  warningForeground: "#1A120D"
+  destructive: "#FF6B35"          # Orange-red — NOT pure red; distinct from gold
+  destructiveForeground: "#F0E6D6"
+  border: "rgba(245, 201, 122, 0.25)"   # Gold border — visible at a glance
+  input: "rgba(26, 18, 13, 0.95)"
+  muted: "rgba(26, 18, 13, 0.90)"
+  mutedForeground: "#9A8D7A"      # 4.86:1 on card bg — passes AA
+  card: "#2A211A"                 # Warm dark brown — elevated surface
+  cardForeground: "#F0E6D6"       # Warm off-white — 12.77:1 ✓ AAA
+  secondary: "#322820"            # Raised surface — between card and bg
+  secondaryForeground: "#B8A898"  # Warm medium gray — 6.83:1 ✓ AA
+  popover: "#2A211A"
+  popoverForeground: "#F0E6D6"
+
+# ─── Assets ───────────────────────────────────────────────────────────────────
+# Custom background image: flowing golden energy form with star particles
+assets:
+  bg: "/ds-assets/009bg.png"
+
+# ─── Component chrome ─────────────────────────────────────────────────────────
+componentStyles:
+  card:
+    background: "linear-gradient(160deg, #322820 0%, #2A211A 100%)"
+    boxShadow: "inset 0 0 0 1px rgba(245, 201, 122, 0.18), 0 2px 16px rgba(0, 0, 0, 0.40)"
+  header:
+    background: "#1A120D"
+    boxShadow: "0 1px 0 rgba(245, 201, 122, 0.22)"
+  sidebar:
+    background: "linear-gradient(180deg, #2A211A 0%, #1A120D 100%)"
+    boxShadow: "1px 0 0 rgba(245, 201, 122, 0.16), 8px 0 32px rgba(0, 0, 0, 0.50)"
+  tab: {}
+  backdrop:
+    fillerOpacity: "0.045"
+    fillerBlendMode: "difference"
+  badge: {}
+  progress:
+    background: "#2A211A"
+  footer:
+    background: "#1A120D"
+    boxShadow: "0 -1px 0 rgba(245, 201, 122, 0.16)"
+
+# ─── Custom CSS ───────────────────────────────────────────────────────────────
+customCSS: |
+  /* ── Warm luxury atmosphere — golden-tinged darkness, gentle vignette ─────── */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 80% 10%, rgba(245, 201, 122, 0.06), transparent 40%),
+      radial-gradient(circle at 20% 85%, rgba(232, 154, 60, 0.04), transparent 35%),
+      radial-gradient(circle at 50% 60%, transparent 50%, #1A120D 115%),
+      #1A120D;
+  }
+
+  /* ── Backdrop: custom background image with golden overlay ────────────────── */
+  :root[style*="--theme-asset-bg"] {
+    --component-backdrop-filler-opacity: 0.045;
+    --component-backdrop-filler-blend-mode: difference;
+    --component-backdrop-background-size: cover;
+    --component-backdrop-background-position: center;
+  }
+
+  /* ── Nav active item: gold left rail ──────────────────────────────────────── */
+  [data-active="true"],
+  .nav-item[aria-current="page"] {
+    border-left: 3px solid #F5C97A;   /* Thicker — more visible for elders */
+    padding-left: calc(0.75rem - 3px);
+    background: rgba(245, 201, 122, 0.08);
+  }
+
+  /* ── Chart bars: gold primary series with orange secondary glow ───────────── */
+  .recharts-wrapper .recharts-bar-rectangle path,
+  .recharts-wrapper [class*="bar-"]:not([class*="progress\"]) rect {
+    fill: #F5C97A;
+    filter: drop-shadow(0 0 6px rgba(245, 201, 122, 0.40));
+  }
+
+  .recharts-wrapper .recharts-line path,
+  [class*="sparkline"] path,
+  [class*="trend"] path {
+    stroke: #F5C97A;
+    stroke-width: 2.5px;   /* Thicker lines — elder-friendly */
+    filter: drop-shadow(0 0 6px rgba(245, 201, 122, 0.38));
+  }
+
+  /* ── Table / list row hover and selection ────────────────────────────────── */
+  tr:hover td,
+  [role="row"]:hover {
+    background: rgba(245, 201, 122, 0.06) !important;
+  }
+  tr[aria-selected="true"] td,
+  [role="row"][aria-selected="true"] {
+    background: rgba(245, 201, 122, 0.12) !important;
+    box-shadow: inset 3px 0 0 #F5C97A;
+  }
+
+  /* ── Tabular numerics for KPIs, tables, cost ─────────────────────────────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"],
+  td,
+  .cost-value {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── KPI values: warm cream + golden glow — high contrast, luxurious ─────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"],
+  .cost-value {
+    color: #F0E6D6 !important;
+    font-weight: 600;          /* Heavier weight — elder readability */
+    letter-spacing: 0.01em;
+    text-shadow: 0 0 14px rgba(245, 201, 122, 0.22);
+  }
+
+  /* ── Card titles: warm mid-tone, comfortable contrast ────────────────────── */
+  .card-title,
+  [class*="CardTitle"] {
+    color: #B8A898;
+    font-size: 0.9375rem;      /* 15px — at baseSize floor, not below */
+    font-weight: 600;
+    letter-spacing: 0.02em;   /* Positive — open, elder-friendly */
+  }
+
+  /* ── Focus rings: thick 2px gold — WCAG 2.4.11 (AAA) compliant ──────────── */
+  *:focus-visible {
+    outline: 2px solid #F5C97A;   /* 2px — elder-friendly thick ring */
+    outline-offset: 3px;
+    box-shadow: 0 0 0 2px rgba(245, 201, 122, 0.25), 0 0 16px rgba(245, 201, 122, 0.18);
+  }
+
+  /* ── Selection highlight ─────────────────────────────────────────────────── */
+  ::selection {
+    background: rgba(245, 201, 122, 0.28);
+    color: #F0E6D6;
+  }
+
+  /* ── Scrollbar: thick 6px — elder-friendly grab target ───────────────────── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(42, 33, 26, 0.60);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(245, 201, 122, 0.45);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 201, 122, 0.75);
+  }
+
+  /* ── Loading / skeleton states ───────────────────────────────────────────── */
+  [data-skeleton="true"],
+  .skeleton,
+  [class*="skeleton"] {
+    background: #2A211A;
+    background-image: linear-gradient(90deg, #2A211A 0%, rgba(245, 201, 122, 0.10) 50%, #2A211A 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 2s infinite linear;
+  }
+  @keyframes skeleton-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* ── Disabled states: clearly dimmed, not just color-shifted ─────────────── */
+  [disabled],
+  [aria-disabled="true"],
+  .disabled {
+    color: #4A3F36 !important;
+    opacity: 0.60;
+    pointer-events: none;
+  }
+
+  /* ── Live badge: gold pulse — high contrast, shape+color dual cue ────────── */
+  [data-variant="live"] {
+    background: #F5C97A !important;
+    color: #1A120D !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 12px rgba(245, 201, 122, 0.60);
+    animation: live-pulse 2s infinite;
+  }
+  @keyframes live-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(245, 201, 122, 0.50); }
+    70% { box-shadow: 0 0 0 10px rgba(245, 201, 122, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(245, 201, 122, 0); }
+  }
+
+  /* ── Progress bars: gold fill — consistent with primary accent ───────────── */
+  [role="progressbar"] [class*="indicator"] {
+    background: #F5C97A !important;
+    box-shadow: 0 0 8px rgba(245, 201, 122, 0.45);
+  }
+
+  /* ── Success states: blue-teal (colorblind safe, not green) ──────────────── */
+  [data-variant="success"],
+  .text-success,
+  [class*="success"] {
+    color: #2DD4BF !important;
+  }
+
+  /* ── Destructive states: orange-red (not pure red, distinct from gold) ───── */
+  [data-variant="destructive"],
+  .text-destructive,
+  [class*="destructive"]:not([class*="Foreground"]):not([class*="background"]) {
+    color: #FF6B35 !important;
+  }

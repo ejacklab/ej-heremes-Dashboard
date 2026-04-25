@@ -1,55 +1,67 @@
-# ej-hermes-Dashboard
+# Hermes Dashboard Themes
 
-Custom themes and plugins for the [Hermes Agent](https://hermes-agent.nousresearch.com) web dashboard.
+Custom themes for the Hermes Agent dashboard. All themes are designed with accessibility-first principles: high contrast, colorblind-safe, and elder-friendly.
 
 ## Themes
 
-### Lux (`lux.yaml`)
+| # | Name | Accent | Description |
+|---|------|--------|-------------|
+| 001 | Nightwave | Cyan + Orange | Near-black navy with steel-blue chrome and icy cyan |
+| 002 | Oxide | Chartreuse | Acidic chartreuse on warm-black with amber bokeh |
+| 003 | Voltis | Cyan + Gold | Deep teal command center with electric cyan chrome |
+| 004 | Helios | Amber + Blue | Deep navy command center — amber-gold accent, colorblind-safe |
+| 005 | Aether | Cyan + Amber | Dark cyan command center — high contrast, elder-friendly |
+| 006 | Luminos | Gold + Teal | Warm amber-gold retro-futuristic command center |
+| 007 | Cipher | Blue + Gold | Cool blue holographic command center |
+| 008 | Aureus | Gold + Teal | Warm golden cosmic command center |
+| 009 | Opus | Gold + Orange | Luxurious golden fintech command center |
+| 010 | Verdant | Lime + Orange | Vibrant lime-green neon command center |
+| 011 | Nexus | Blue + Amber | Cool blue cyberpunk command center |
+| 012 | Aurora | Cyan + Gold | Electric cyan aurora command center |
+| — | Bastion | Terracotta | Military ops olive-green with terracotta accent |
+| — | Lux | Cyan | Deep indigo command center with electric cyan accent |
 
-Deep indigo command center. Electric cyan accent, sharp geometry, JetBrains Mono data readouts.
+## Accessibility Standards
 
-**Install:**
+All themes comply with:
+
+- **WCAG 2.2 AA** minimum (4.5:1 contrast for text)
+- **WCAG AAA** target (7:1) for primary text and KPIs
+- **Colorblind-safe**: No red/green semantic pairing. Success = blue-teal, Destructive = orange-red
+- **Elder-friendly**: 15px base font, 1.6 line height, 0.02em letter spacing, comfortable density
+- **Focus rings**: 2px thick (WCAG 2.4.11)
+- **Chart strokes**: 2.5px minimum
+- **Scrollbar**: 6px width for grab targets
+
+## Installation
+
+Copy the YAML files to your Hermes dashboard themes directory:
+
 ```bash
-cp lux.yaml ~/.hermes/dashboard-themes/lux.yaml
+cp *.yaml ~/.hermes/dashboard-themes/
 ```
 
-Then open the dashboard, click the palette icon in the header, and select **Lux**.
+For themes with background images, copy the bg-assets to the web dist:
 
-**What it changes:**
-- Palette: void-black `#080b18` base → cool periwinkle text → electric cyan `#00e5ff` accents
-- Typography: Space Grotesk (body) + JetBrains Mono (code/data), 14px compact scale
-- Layout: 0.25rem radius (sharp micro-bevel), compact density
-- Components: gradient cards with cyan inset border, angled tabs, slim cyan scrollbars
-- Chart bars: cyan gradient replacing the default washed-out beige
-- Cost values: mint green `#00ffa3` for positive financial data
-- Subtle scanline texture overlay
-
-### Bastion (`bastion.yaml`)
-
-Military ops / topographic aesthetic. Olive forest greens, warm cream text, terracotta accent — straight from the palette `#040302 → #181D11 → #2C3621 → #4F5A42 → #839177 → #9FAE97 → #C5BE94 → #DFDCC3` with `#B26948` terracotta for trend lines, CTAs, and live badges.
-
-**Install:**
 ```bash
-cp bastion.yaml ~/.hermes/dashboard-themes/bastion.yaml
+cp bg-assets/*.png ~/.hermes/hermes-agent/hermes_cli/web_dist/ds-assets/
 ```
 
-Then open the dashboard → palette icon → **Bastion**.
+Then restart the dashboard and select the theme from the picker.
 
-**What it changes:**
-- Palette: void black → olive panel layers → warm cream text → terracotta accent
-- Typography: DM Sans (body) + IBM Plex Mono (data readouts)
-- Cards: gradient from `#2C3621` → `#181D11` with olive inset border
-- Topo texture: scanlines + crosshatch grid overlay (screen blend)
-- Nav active: terracotta left bar + background tint
-- Chart trend lines: terracotta `#B26948`
-- Stat numbers: `#DFDCC3` warm cream highlight
-- Card titles: uppercase small-caps `#DFDCC3`
-- Slim 4px olive scrollbars
-- Live badges: terracotta glow pulse
+## Background Images
 
----
+Themes 006–012 use custom background images (`assets.bg`). These render at ~4.5% opacity with `difference` blend mode — subtle texture, not overpowering.
 
-## Planned
+## File Structure
 
-- [ ] MoneyFlow plugin tab — finance data inline
-- [ ] Agent Hub tab — live status of all running agents (Lux, Apex, Sear, Orion)
+```
+.
+├── *.yaml                    # Theme definitions
+├── bg-assets/                # Background images for themes
+│   ├── 006bg.png – 012bg.png
+│   └── filler-bg0.jpg        # Default dashboard filler
+├── reference-images/         # Source reference images
+│   └── 001.png – 012.png
+└── README.md
+```

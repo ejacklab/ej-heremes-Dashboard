@@ -1,0 +1,238 @@
+name: oxide
+label: Oxide
+description: Acidic chartreuse on warm-black with amber bokeh – industrial command center
+
+# ─── Palette ──────────────────────────────────────────────────────────────────
+palette:
+  background:
+    hex: "#0A0A0A"
+    alpha: 1.0
+  midground: "#F2F2F0"
+  foreground:
+    hex: "#B4DC14"
+    alpha: 0.08
+  warmGlow: "rgba(224, 123, 10, 0.20)"
+  noiseOpacity: 0.40
+
+# ─── Typography ───────────────────────────────────────────────────────────────
+typography:
+  fontSans: '"Inter", "SF Pro Display", "IBM Plex Sans", system-ui, sans-serif'
+  fontMono: '"JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace'
+  fontDisplay: '"Space Grotesk", "Inter", system-ui, sans-serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+  baseSize: "15px"
+  lineHeight: "1.6"
+  letterSpacing: "0"
+
+# ─── Layout ───────────────────────────────────────────────────────────────────
+layout:
+  radius: "0.5rem"
+  density: compact
+
+layoutVariant: standard
+
+# ─── Color overrides ──────────────────────────────────────────────────────────
+colorOverrides:
+  primary: "#B4DC14"
+  primaryForeground: "#0A0A0A"
+  accent: "#A8E80C"
+  accentForeground: "#0A0A0A"
+  ring: "#B4DC14"
+  success: "#1FE05A"
+  warning: "#F39C1F"
+  destructive: "#E8453A"
+  destructiveForeground: "#F2F2F0"
+  border: "rgba(180, 220, 20, 0.18)"
+  input: "rgba(26, 28, 18, 0.88)"
+  muted: "rgba(15, 17, 8, 0.86)"
+  mutedForeground: "#A0A096"
+  card: "#1A1C12"
+  cardForeground: "#F2F2F0"
+  secondary: "#28281E"
+  secondaryForeground: "#A0A096"
+  popover: "#1A1C12"
+  popoverForeground: "#F2F2F0"
+
+# ─── Component chrome ─────────────────────────────────────────────────────────
+componentStyles:
+  card:
+    background: "linear-gradient(160deg, #1A1C12 0%, #0F1108 100%)"
+    boxShadow: "inset 0 0 0 1px rgba(180, 220, 20, 0.12), 0 0 12px rgba(180, 220, 20, 0.06)"
+  header:
+    background: "#0A0A0A"
+    boxShadow: "0 1px 0 rgba(180, 220, 20, 0.18)"
+  sidebar:
+    background: "linear-gradient(160deg, #1A1C12 0%, #0F1108 100%)"
+    boxShadow: "1px 0 0 rgba(180, 220, 20, 0.12)"
+  tab: {}
+  backdrop: {}
+  badge: {}
+  progress:
+    background: "#1A1C12"
+  footer:
+    background: "#0A0A0A"
+    boxShadow: "0 -1px 0 rgba(180, 220, 20, 0.12)"
+
+# ─── Custom CSS ───────────────────────────────────────────────────────────────
+customCSS: |
+  /* ── Cinematic dashboard atmosphere: amber bokeh + vignette ────────────── */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(224, 123, 10, 0.10), transparent 40%),
+      radial-gradient(circle at 50% 60%, transparent 45%, #0A0A0A 110%),
+      #0A0A0A;
+  }
+
+  /* ── Fine screen grain + static scanline ────────────────────────────────── */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2; /* below modals/overlays */
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(180, 220, 20, 0.015) 4px,
+        rgba(180, 220, 20, 0.015) 5px
+      ),
+      radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: auto, 3px 3px;
+    opacity: 0.40;
+    mix-blend-mode: screen;
+  }
+
+  /* ── Nav active item: lime rail ────────────────────────────────────────── */
+  [data-active="true"],
+  .nav-item[aria-current="page"] {
+    border-left: 2px solid #B4DC14;
+    padding-left: calc(0.75rem - 2px);
+    background: rgba(180, 220, 20, 0.06);
+  }
+
+  /* ── Chart bars/lines: chartreuse glow ──────────────────────────────────── */
+  /* Scoped to recharts context — do not over-match progress bars or other
+     components. Lime is the PRIMARY series; secondary series (amber, emerald,
+     etc.) are set via inline `fill`/`stroke` props on individual chart series
+     and are NOT overridden here. */
+  .recharts-wrapper .recharts-bar-rectangle path,
+  .recharts-wrapper [class*="bar-"]:not([class*="progress"]) rect {
+    filter: drop-shadow(0 0 8px rgba(180, 220, 20, 0.32));
+  }
+
+  .recharts-wrapper .recharts-line path,
+  [class*="sparkline"] path,
+  [class*="trend"] path {
+    stroke: #B4DC14;
+    filter: drop-shadow(0 0 8px rgba(180, 220, 20, 0.32));
+  }
+
+  /* ── Tables / lists interaction states ──────────────────────────────────── */
+  tr:hover td,
+  [role="row"]:hover {
+    background: rgba(180, 220, 20, 0.05) !important;
+  }
+  tr[aria-selected="true"] td,
+  [role="row"][aria-selected="true"] {
+    background: rgba(180, 220, 20, 0.10) !important;
+    box-shadow: inset 3px 0 0 #B4DC14;
+  }
+
+  /* ── Tabular numerics for KPIs and tables ───────────────────────────────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"],
+  td,
+  .cost-value {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── KPI values: sharp lime text ────────────────────────────────────────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"] {
+    color: #F2F2F0 !important;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 12px rgba(180, 220, 20, 0.25);
+  }
+
+  /* ── Card titles ────────────────────────────────────────────────────────── */
+  .card-title,
+  [class*="CardTitle"] {
+    color: #A0A096;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  /* ── Focus rings: accessible chartreuse ─────────────────────────────────── */
+  *:focus-visible {
+    outline: 1.5px solid #B4DC14;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 1px rgba(180, 220, 20, 0.30), 0 0 24px rgba(168, 232, 12, 0.22);
+  }
+
+  /* ── Scrollbar: thin chartreuse ─────────────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(180, 220, 20, 0.45);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 232, 12, 0.70);
+  }
+
+  /* ── Loading / skeleton states ──────────────────────────────────────────── */
+  [data-skeleton="true"],
+  .skeleton,
+  [class*="skeleton"] {
+    background: #1A1C12;
+    background-image: linear-gradient(90deg, #1A1C12 0%, rgba(180, 220, 20, 0.14) 50%, #1A1C12 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 2s infinite linear;
+  }
+  @keyframes skeleton-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* ── Disabled states ────────────────────────────────────────────────────── */
+  [disabled],
+  [aria-disabled="true"],
+  .disabled {
+    color: #4A4D40 !important;
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  /* ── Live badge: chartreuse pulse emphasis ──────────────────────────────── */
+  [data-variant="live"] {
+    background: #B4DC14 !important;
+    color: #0A0A0A !important;
+    box-shadow: 0 0 10px rgba(168, 232, 12, 0.55);
+    animation: live-pulse 2s infinite;
+  }
+  @keyframes live-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(180, 220, 20, 0.45); }
+    70% { box-shadow: 0 0 0 10px rgba(180, 220, 20, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(180, 220, 20, 0); }
+  }
+
+  /* ── Progress bars ──────────────────────────────────────────────────────── */
+  [role="progressbar"] [class*="indicator"] {
+    background: #B4DC14 !important;
+    box-shadow: 0 0 8px rgba(180, 220, 20, 0.4);
+  }

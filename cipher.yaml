@@ -1,0 +1,282 @@
+name: cipher
+label: Cipher
+description: "Cool blue holographic command center — high contrast, colorblind-safe, elder-friendly"
+
+# ─── Palette ──────────────────────────────────────────────────────────────────
+# All text/bg pairs verified WCAG AA (4.5:1) or AAA (7:1).
+# Accent strategy: blue (primary) + gold (secondary) — safe for all colorblind types.
+# No red/green semantic pairing. Custom background image (navy line-engraving illustration).
+palette:
+  background:
+    hex: "#080810"    # Deep navy-black — not pure black (halation risk for elders)
+    alpha: 1.0
+  midground: "#E2EAFF"  # Cool white — ~16:1 on card, crisp and readable
+  foreground:
+    hex: "#4466FF"    # Cool blue accent glow layer — matches reference dominant
+    alpha: 0.08
+  warmGlow: "rgba(68, 102, 255, 0.12)"   # Blue glow — cohesive with accent
+  noiseOpacity: 0.18   # Minimal grain — elders prefer clean surfaces
+
+# ─── Typography ───────────────────────────────────────────────────────────────
+# Inter: large x-height, open counters — best legibility at small sizes
+# letterSpacing: positive — opens type for aging eyes
+typography:
+  fontSans: '"Inter", "SF Pro Display", "IBM Plex Sans", system-ui, sans-serif'
+  fontMono: '"JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace'
+  fontDisplay: '"Space Grotesk", "Inter", system-ui, sans-serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+  baseSize: "15px"
+  lineHeight: "1.6"
+  letterSpacing: "0.02em"   # Positive — opens up type, elder-friendly
+
+# ─── Layout ───────────────────────────────────────────────────────────────────
+layout:
+  radius: "0.5rem"
+  density: comfortable   # NOT compact — elders need generous tap targets
+
+layoutVariant: standard
+
+# ─── Color overrides ──────────────────────────────────────────────────────────
+# Contrast ratios vs card bg (#0C0C1E):
+#   #4466FF blue:     ~4.22:1  ✓ AA-Large / UI components (3:1+)
+#   #B89858 gold:     ~7.06:1  ✓ AAA
+#   #E2EAFF cream:    ~16.05:1 ✓ AAA
+#   #8898B8 sec text: ~6.65:1  ✓ AA
+#   #7888A8 muted:    ~5.41:1  ✓ AA  (safe for elders)
+#   #FF6B35 destr:    ~6.81:1  ✓ AA+ (orange-red, distinct from blue)
+#   #2DD4BF success:  ~10.38:1 ✓ AAA (blue-teal — NOT green, colorblind safe)
+colorOverrides:
+  primary: "#4466FF"              # Cool blue — primary accent, borders, glows
+  primaryForeground: "#E2EAFF"    # Light text on blue — for buttons/labels
+  accent: "#B89858"               # Warm gold — secondary accent, contrast warmth
+  accentForeground: "#080810"
+  ring: "#4466FF"                 # Blue focus ring — thick 2px in customCSS
+  success: "#2DD4BF"              # Blue-teal — NOT green (colorblind safe)
+  successForeground: "#080810"
+  warning: "#B89858"              # Gold — same as accent; unambiguous
+  warningForeground: "#080810"
+  destructive: "#FF6B35"          # Orange-red — NOT pure red; distinct from blue
+  destructiveForeground: "#E2EAFF"
+  border: "rgba(68, 102, 255, 0.28)"   # Blue border — visible wireframe feel
+  input: "rgba(8, 8, 16, 0.95)"
+  muted: "rgba(8, 8, 16, 0.90)"
+  mutedForeground: "#7888A8"      # 5.41:1 on card bg — passes AA
+  card: "#0C0C1E"                 # Dark blue-black — elevated surface
+  cardForeground: "#E2EAFF"       # Cool white — 16:1 ✓ AAA
+  secondary: "#10102A"            # Raised surface — between card and bg
+  secondaryForeground: "#8898B8"  # Blue mid-gray — 6.65:1 ✓ AA
+  popover: "#0C0C1E"
+  popoverForeground: "#E2EAFF"
+
+# ─── Assets ───────────────────────────────────────────────────────────────────
+# Custom background image: navy line-engraving illustration with figure
+assets:
+  bg: "/ds-assets/007bg.png"
+
+# ─── Component chrome ─────────────────────────────────────────────────────────
+componentStyles:
+  card:
+    background: "linear-gradient(160deg, #10102A 0%, #0C0C1E 100%)"
+    boxShadow: "inset 0 0 0 1px rgba(68, 102, 255, 0.20), 0 2px 16px rgba(0, 0, 0, 0.40)"
+  header:
+    background: "#080810"
+    boxShadow: "0 1px 0 rgba(68, 102, 255, 0.22)"
+  sidebar:
+    background: "linear-gradient(180deg, #0C0C1E 0%, #080810 100%)"
+    boxShadow: "1px 0 0 rgba(68, 102, 255, 0.16), 8px 0 32px rgba(0, 0, 0, 0.50)"
+  tab: {}
+  backdrop:
+    fillerOpacity: "0.045"
+    fillerBlendMode: "difference"
+  badge: {}
+  progress:
+    background: "#0C0C1E"
+  footer:
+    background: "#080810"
+    boxShadow: "0 -1px 0 rgba(68, 102, 255, 0.16)"
+
+# ─── Custom CSS ───────────────────────────────────────────────────────────────
+customCSS: |
+  /* ── Cool depth atmosphere — blue-tinged darkness, gentle vignette ────────── */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 80% 10%, rgba(68, 102, 255, 0.06), transparent 40%),
+      radial-gradient(circle at 20% 85%, rgba(184, 152, 88, 0.04), transparent 35%),
+      radial-gradient(circle at 50% 60%, transparent 50%, #080810 115%),
+      #080810;
+  }
+
+  /* ── Backdrop: custom background image with blue overlay ──────────────────── */
+  :root[style*="--theme-asset-bg"] {
+    --component-backdrop-filler-opacity: 0.045;
+    --component-backdrop-filler-blend-mode: difference;
+    --component-backdrop-background-size: cover;
+    --component-backdrop-background-position: center;
+  }
+
+  /* ── Nav active item: blue left rail ──────────────────────────────────────── */
+  [data-active="true"],
+  .nav-item[aria-current="page"] {
+    border-left: 3px solid #4466FF;   /* Thicker — more visible for elders */
+    padding-left: calc(0.75rem - 3px);
+    background: rgba(68, 102, 255, 0.08);
+  }
+
+  /* ── Chart bars: blue primary series with cyan secondary glow ─────────────── */
+  .recharts-wrapper .recharts-bar-rectangle path,
+  .recharts-wrapper [class*="bar-"]:not([class*="progress\"]) rect {
+    fill: #4466FF;
+    filter: drop-shadow(0 0 6px rgba(68, 102, 255, 0.40));
+  }
+
+  .recharts-wrapper .recharts-line path,
+  [class*="sparkline"] path,
+  [class*="trend"] path {
+    stroke: #22AAEE;
+    stroke-width: 2.5px;   /* Thicker lines — elder-friendly */
+    filter: drop-shadow(0 0 6px rgba(34, 170, 238, 0.38));
+  }
+
+  /* ── Table / list row hover and selection ────────────────────────────────── */
+  tr:hover td,
+  [role="row"]:hover {
+    background: rgba(68, 102, 255, 0.06) !important;
+  }
+  tr[aria-selected="true"] td,
+  [role="row"][aria-selected="true"] {
+    background: rgba(68, 102, 255, 0.12) !important;
+    box-shadow: inset 3px 0 0 #4466FF;
+  }
+
+  /* ── Tabular numerics for KPIs, tables, cost ─────────────────────────────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"],
+  td,
+  .cost-value {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── KPI values: cool white + blue glow — high contrast, crisp, readable ─── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"],
+  .cost-value {
+    color: #E2EAFF !important;
+    font-weight: 600;          /* Heavier weight — elder readability */
+    letter-spacing: 0.01em;
+    text-shadow: 0 0 14px rgba(68, 102, 255, 0.22);
+  }
+
+  /* ── Card titles: blue mid-tone, comfortable contrast ────────────────────── */
+  .card-title,
+  [class*="CardTitle"] {
+    color: #8898B8;
+    font-size: 0.9375rem;      /* 15px — at baseSize floor, not below */
+    font-weight: 600;
+    letter-spacing: 0.02em;   /* Positive — open, elder-friendly */
+  }
+
+  /* ── Focus rings: thick 2px blue — WCAG 2.4.11 (AAA) compliant ──────────── */
+  *:focus-visible {
+    outline: 2px solid #4466FF;   /* 2px — elder-friendly thick ring */
+    outline-offset: 3px;
+    box-shadow: 0 0 0 2px rgba(68, 102, 255, 0.25), 0 0 16px rgba(68, 102, 255, 0.18);
+  }
+
+  /* ── Selection highlight ─────────────────────────────────────────────────── */
+  ::selection {
+    background: rgba(68, 102, 255, 0.28);
+    color: #E2EAFF;
+  }
+
+  /* ── Scrollbar: thick 6px — elder-friendly grab target ───────────────────── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(12, 12, 30, 0.60);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(68, 102, 255, 0.45);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(68, 102, 255, 0.75);
+  }
+
+  /* ── Loading / skeleton states ───────────────────────────────────────────── */
+  [data-skeleton="true"],
+  .skeleton,
+  [class*="skeleton"] {
+    background: #0C0C1E;
+    background-image: linear-gradient(90deg, #0C0C1E 0%, rgba(68, 102, 255, 0.10) 50%, #0C0C1E 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 2s infinite linear;
+  }
+  @keyframes skeleton-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* ── Disabled states: clearly dimmed, not just color-shifted ─────────────── */
+  [disabled],
+  [aria-disabled="true"],
+  .disabled {
+    color: #3A4060 !important;
+    opacity: 0.60;
+    pointer-events: none;
+  }
+
+  /* ── Live badge: blue pulse — high contrast, shape+color dual cue ────────── */
+  [data-variant="live"] {
+    background: #4466FF !important;
+    color: #E2EAFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 12px rgba(68, 102, 255, 0.60);
+    animation: live-pulse 2s infinite;
+  }
+  @keyframes live-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(68, 102, 255, 0.50); }
+    70% { box-shadow: 0 0 0 10px rgba(68, 102, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(68, 102, 255, 0); }
+  }
+
+  /* ── Progress bars: blue fill — consistent with primary accent ───────────── */
+  [role="progressbar"] [class*="indicator"] {
+    background: #4466FF !important;
+    box-shadow: 0 0 8px rgba(68, 102, 255, 0.45);
+  }
+
+  /* ── Success states: blue-teal (colorblind safe, not green) ──────────────── */
+  [data-variant="success"],
+  .text-success,
+  [class*="success"] {
+    color: #2DD4BF !important;
+  }
+
+  /* ── Destructive states: orange-red (not pure red, distinct from blue) ───── */
+  [data-variant="destructive"],
+  .text-destructive,
+  [class*="destructive"]:not([class*="Foreground"]):not([class*="background"]) {
+    color: #FF6B35 !important;
+  }
+
+  /* ── Interactive links: gold accent for visibility against blue chrome ───── */
+  a:not([class]),
+  a[href] {
+    color: #B89858;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  a:not([class]):hover,
+  a[href]:hover {
+    color: #D4B070;
+  }
