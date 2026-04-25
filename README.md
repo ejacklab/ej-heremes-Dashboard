@@ -41,13 +41,22 @@ Copy the YAML files to your Hermes dashboard themes directory:
 cp *.yaml ~/.hermes/dashboard-themes/
 ```
 
-For themes with background images, copy the bg-assets to the web dist:
+For themes with background images (006–012), copy the bg-assets to the
+web public directory so the dashboard can serve them:
 
 ```bash
-cp bg-assets/*.png ~/.hermes/hermes-agent/hermes_cli/web_dist/ds-assets/
+cp bg-assets/*.png ~/.hermes/hermes-agent/web/public/ds-assets/
+cp bg-assets/*.jpg ~/.hermes/hermes-agent/web/public/ds-assets/
 ```
 
-Then restart the dashboard and select the theme from the picker.
+Then rebuild the frontend and restart the dashboard:
+
+```bash
+cd ~/.hermes/hermes-agent/web && npm run build
+hermes dashboard --no-open
+```
+
+Select the theme from the picker at http://127.0.0.1:9119.
 
 ## Background Images
 
