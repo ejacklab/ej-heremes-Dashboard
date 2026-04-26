@@ -71,7 +71,7 @@ colorOverrides:
 # ─── Assets ───────────────────────────────────────────────────────────────────
 # Custom background image: cosmic tree with golden highlights and cyan stars
 assets:
-  bg: "/ds-assets/003bg.png"
+  bg: "/ds-assets/001bg.png"
 
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:

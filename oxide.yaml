@@ -57,7 +57,7 @@ colorOverrides:
 # ─── Assets ───────────────────────────────────────────────────────────────────
 # Custom background image: aurora night sky with electric blue, violet, stars
 assets:
-  bg: "/ds-assets/001bg.png"
+  bg: "/ds-assets/005bg.png"
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
   card:

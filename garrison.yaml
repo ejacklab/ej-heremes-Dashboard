@@ -56,7 +56,7 @@ colorOverrides:
 
 # ─── Assets ───────────────────────────────────────────────────────────────────
 assets:
-  bg: "/ds-assets/005bg.png"
+  bg: "/ds-assets/002bg.png"
 
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:

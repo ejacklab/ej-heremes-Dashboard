@@ -6,11 +6,11 @@ Custom themes for the Hermes Agent dashboard.
 
 | # | Name | Accent | Description |
 |---|------|--------|-------------|
-| 001 | Oxide | Chartreuse | Acidic chartreuse on warm-black with amber bokeh |
-| 002 | Helios | Amber + Blue | Navy command center — amber-gold accent, colorblind-safe |
-| 003 | Aureus | Gold + Teal | Warm golden cosmic command center |
+| 001 | Aureus | Gold + Teal | Warm golden cosmic command center |
+| 002 | Garrison | Terracotta + Blue | Bright olive command center — high-contrast, section-colored |
+| 003 | Helios | Amber + Blue | Navy command center — amber-gold accent, colorblind-safe |
 | 004 | Opus | Gold + Orange | Luxurious golden fintech command center |
-| 005 | Garrison | Terracotta + Blue | Bright olive command center — high-contrast, section-colored |
+| 005 | Oxide | Chartreuse | Acidic chartreuse on warm-black with amber bokeh |
 
 ## Installation
 
