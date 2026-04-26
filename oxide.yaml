@@ -253,3 +253,11 @@ customCSS: |
   .bg-emerald-500 {
     background-color: rgba(168, 232, 12, 0.70) !important;
   }
+
+  /* ── KPI summary values: Inter for crisp number rendering ─────────────── */
+  /* Mondwest only has weight 400 loaded; font-bold causes faux-bold blur.
+     Override to Inter which has proper 700 weight + tabular numerics. */
+  .text-2xl.font-bold {
+    font-family: "Inter", "SF Pro Display", system-ui, sans-serif !important;
+    font-variant-numeric: tabular-nums;
+  }
