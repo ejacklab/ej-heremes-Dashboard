@@ -97,9 +97,6 @@ componentStyles:
 
 # ─── Custom CSS ───────────────────────────────────────────────────────────────
 customCSS: |
-  /* ── Font preload: ensure Inter is loaded (DM Sans from prev theme sticks) ── */
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
   /* ── Font override: force Inter (DM Sans looks pixelized on data pages) ──── */
   body,
   body *:not([class*="font-mono"]):not(code):not(pre):not(kbd):not(samp) {
@@ -217,11 +214,11 @@ customCSS: |
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(245, 224, 176, 0.45);
+    background: rgba(245, 224, 176, 0.35);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(245, 224, 176, 0.75);
+    background: rgba(245, 224, 176, 0.55);
   }
 
   /* ── Loading / skeleton states ───────────────────────────────────────────── */
@@ -282,6 +279,8 @@ customCSS: |
   }
 
   /* ── Wave 2: Bar chart — 3D gradient bars with depth ────────────────────── */
+  /* NOTE: These selectors target internal Tailwind classes (bg-[#ffe6cb], bg-emerald-500).
+     They may break if the dashboard renames these classes in future updates. */
   @keyframes barGrowUp {
     from { transform: scaleY(0); opacity: 0.4; }
     to   { transform: scaleY(1); opacity: 1; }
@@ -435,12 +434,4 @@ customCSS: |
       100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
     }
 
-    /* 3. Gold scrollbar — warm gold-tinted thumb */
-    ::-webkit-scrollbar-thumb {
-      background: rgba(245, 224, 176, 0.35);
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(245, 224, 176, 0.55);
-    }
 
