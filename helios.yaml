@@ -577,9 +577,11 @@ customCSS: |
   }
 
   /* ── OUTPUT BARS — blue-teal, last child after tooltip + input ──────────── */
+  /* Low output values need a visual floor; otherwise the blue series becomes a 1px sliver. */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child) {
     position: relative !important;
     z-index: 1 !important;
+    min-height: 4px !important;
     transform-origin: bottom !important;
     background: linear-gradient(to top, #006E88 0%, #0090B0 15%, #00B4D8 45%, #33D4E8 85%, #69DFF2 100%) !important;
     box-shadow:
@@ -589,6 +591,21 @@ customCSS: |
       0 0 8px rgba(0, 180, 216, 0.20) !important;
     border-radius: 0 0 2px 2px !important;
     transition: filter 150ms ease-out, box-shadow 150ms ease-out !important;
+  }
+  /* Persistent output marker: shape cue makes tiny output days visible without changing DOM. */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child)::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    width: 5px !important;
+    height: 5px !important;
+    transform: translate(-50%, -50%) !important;
+    border: 1.5px solid #141E28 !important;
+    border-radius: 999px !important;
+    background: #00B4D8 !important;
+    box-shadow: 0 0 6px rgba(0, 180, 216, 0.55) !important;
+    pointer-events: none !important;
   }
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:hover > .w-full:last-child:not(:first-child) {
     filter: brightness(1.15) !important;
