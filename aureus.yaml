@@ -298,8 +298,8 @@ customCSS: |
   [class*="bg-[#ffe6cb]"]:not([class*="/"]) {
     background-color: #F5E0B0 !important;
   }
-  .recharts-wrapper [class*="bg-[#ffe6cb]/70"],
-  [class*="BarChart"] [class*="bg-[#ffe6cb]/70"] {
+  
+  [class*="bg-[#ffe6cb]/70"] {
     position: relative;
     overflow: hidden;
     background: linear-gradient(
@@ -320,8 +320,8 @@ customCSS: |
     transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
   /* Wave 3: Specular streak — light reflection on top 25% */
-  .recharts-wrapper [class*="bg-[#ffe6cb]/70"]::before,
-  [class*="BarChart"] [class*="bg-[#ffe6cb]/70"]::before {
+  
+  [class*="bg-[#ffe6cb]/70"]::before {
     content: "";
     position: absolute;
     inset: 0 20% 75% 20%;
@@ -338,8 +338,8 @@ customCSS: |
   [class*="bg-emerald-500"]:not([class*="/"]) {
     background-color: #2DD4BF !important;
   }
-  .recharts-wrapper [class*="bg-emerald-500/70"],
-  [class*="BarChart"] [class*="bg-emerald-500/70"] {
+  
+  [class*="bg-emerald-500/70"] {
     position: relative;
     overflow: hidden;
     background: linear-gradient(
@@ -360,8 +360,8 @@ customCSS: |
     transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
   /* Wave 3: Specular streak — light reflection on top 25% */
-  .recharts-wrapper [class*="bg-emerald-500/70"]::before,
-  [class*="BarChart"] [class*="bg-emerald-500/70"]::before {
+  
+  [class*="bg-emerald-500/70"]::before {
     content: "";
     position: absolute;
     inset: 0 20% 75% 20%;
@@ -375,8 +375,8 @@ customCSS: |
   }
 
   /* ── Bar hover: brighten + intensify glow (scoped to chart column) ────── */
-  .group:hover > .recharts-wrapper [class*="bg-[#ffe6cb]/70"],
-  .group:hover > [class*="BarChart"] [class*="bg-[#ffe6cb]/70"] {
+  .group:hover > 
+  .group:hover > [class*="bg-[#ffe6cb]/70"] {
     filter: brightness(1.15);
     box-shadow:
       inset 2px 0 0 rgba(255, 244, 210, 0.55),
@@ -385,8 +385,8 @@ customCSS: |
       0 3px 14px rgba(0, 0, 0, 0.50),
       0 0 16px rgba(245, 224, 176, 0.35);
   }
-  .group:hover > .recharts-wrapper [class*="bg-emerald-500/70"],
-  .group:hover > [class*="BarChart"] [class*="bg-emerald-500/70"] {
+  .group:hover > 
+  .group:hover > [class*="bg-emerald-500/70"] {
     filter: brightness(1.12);
     box-shadow:
       inset 2px 0 0 rgba(100, 255, 240, 0.50),
