@@ -261,3 +261,15 @@ customCSS: |
     font-family: "Inter", "SF Pro Display", system-ui, sans-serif !important;
     font-variant-numeric: tabular-nums;
   }
+
+  /* ── Code/token elements: dark bg instead of cream midground ───────────── */
+  /* Global CSS sets code bg to var(--midground) which is cream on Oxide.
+     Override to dark surface for token displays, inline code, CLI snippets. */
+  code {
+    background: rgba(26, 28, 18, 0.85) !important;
+    color: #B4DC14 !important;
+    border: 1px solid rgba(180, 220, 20, 0.15);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 0.8rem;
+  }
