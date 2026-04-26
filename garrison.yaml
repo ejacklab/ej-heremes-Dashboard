@@ -403,24 +403,61 @@ customCSS: |
     transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
 
-  /* ── Output bars: sage with vertical gradient + inner highlight ───────── */
-  [class*="bg-emerald-500"] {
+  /* ═══════════════════════════════════════════════════════════════════════════
+     OUTPUT — Lollipop markers (dot-on-stem)
+     Output values are low, so bars become invisible slivers.
+     Instead: thin stem + dot at the top. Always visible, always readable.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Fallback for solid bars */
+  [class*="bg-emerald-500"]:not([class*="/"]) {
     background-color: #B8D4A0 !important;
   }
+
+  /* Stem: thin vertical line, full height, centered */
   [class*="bg-emerald-500/70"] {
+    position: relative;
+    overflow: visible;
+    width: 2px !important;
+    min-width: 2px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
     background: linear-gradient(
       to top,
-      rgba(140, 180, 110, 0.78),
-      rgba(184, 212, 160, 0.88) 40%,
-      rgba(210, 235, 190, 0.72)
+      rgba(140, 180, 110, 0.60),
+      rgba(184, 212, 160, 0.90)
     ) !important;
-    box-shadow:
-      inset 1px 0 0 rgba(230, 255, 210, 0.18),
-      inset -1px 0 0 rgba(60, 90, 40, 0.20),
-      inset 0 1px 0 rgba(230, 255, 210, 0.14),
-      0 0 6px rgba(184, 212, 160, 0.15);
     border-radius: 0;
-    transition: filter 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 4px rgba(184, 212, 160, 0.25);
+    transition: box-shadow 0.25s ease;
+    z-index: 3;
+  }
+
+  /* Dot: circle at top of stem */
+  [class*="bg-emerald-500/70"]::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      circle at 40% 35%,
+      #D2EBC0,
+      #B8D4A0 50%,
+      #9CC480 100%
+    );
+    box-shadow:
+      0 0 0 2px rgba(140, 180, 110, 0.40),
+      0 0 6px rgba(184, 212, 160, 0.45);
+    pointer-events: none;
+  }
+
+  /* No specular on lollipop — dot IS the highlight */
+  [class*="bg-emerald-500/70"]::after {
+    content: none;
   }
 
   /* ── Bar hover: brighten + intensify glow on column hover ────────────── */
@@ -432,13 +469,14 @@ customCSS: |
       inset 0 1px 0 rgba(255, 220, 180, 0.22),
       0 0 14px rgba(212, 136, 92, 0.35);
   }
+  /* Output hover: brighter dot + stronger glow */
   .group:hover > [class*="bg-emerald-500/70"] {
-    filter: brightness(1.12);
+    box-shadow: 0 0 8px rgba(184, 212, 160, 0.50);
+  }
+  .group:hover > [class*="bg-emerald-500/70"]::before {
     box-shadow:
-      inset 1px 0 0 rgba(230, 255, 210, 0.25),
-      inset -1px 0 0 rgba(60, 90, 40, 0.25),
-      inset 0 1px 0 rgba(230, 255, 210, 0.22),
-      0 0 14px rgba(184, 212, 160, 0.30);
+      0 0 0 2px rgba(184, 212, 160, 0.60),
+      0 0 12px rgba(184, 212, 160, 0.65);
   }
 
   /* ── Chart container: subtle topographic grid + olive vignette ────────── */
@@ -505,16 +543,16 @@ customCSS: |
     border-top: 1px solid rgba(140, 160, 120, 0.12);
   }
 
-  /* ── Legend swatches: rounded with glow + gradient fill ───────────────── */
+  /* Legend swatches: rounded with glow + gradient fill */
   .h-2\\.5.w-2\\.5.bg-\\[\\#ffe6cb\\] {
     background: linear-gradient(135deg, #D4885C, #E8A878) !important;
     border-radius: 3px;
     box-shadow: 0 0 6px rgba(212, 136, 92, 0.30);
   }
   .h-2\\.5.w-2\\.5.bg-emerald-500 {
-    background: linear-gradient(135deg, #9CC480, #B8D4A0) !important;
-    border-radius: 3px;
-    box-shadow: 0 0 6px rgba(184, 212, 160, 0.30);
+    background: radial-gradient(circle at 40% 35%, #D2EBC0, #B8D4A0 50%, #9CC480) !important;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(140, 180, 110, 0.40), 0 0 6px rgba(184, 212, 160, 0.30);
   }
 
   /* ── Legend text: uppercase tracking, muted sage ──────────────────────── */
