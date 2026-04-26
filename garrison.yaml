@@ -380,22 +380,166 @@ customCSS: |
   /* ═══════════════════════════════════════════════════════════════════════════
      ANALYTICS — Chart bars, legend swatches, table colors
      Override hardcoded #ffe6cb (peach) and emerald to Garrison palette
+     Enhanced with gradients, depth, glow, and animation.
      ═══════════════════════════════════════════════════════════════════════════ */
 
-  /* ── Input bars / legend swatch: peach → terracotta ──────────────────── */
+  /* ── Input bars: terracotta with vertical gradient + inner highlight ──── */
   [class*="bg-[#ffe6cb]"] {
     background-color: #D4885C !important;
   }
   [class*="bg-[#ffe6cb]/70"] {
-    background-color: rgba(212, 136, 92, 0.70) !important;
+    background: linear-gradient(
+      to top,
+      rgba(180, 100, 55, 0.82),
+      rgba(212, 136, 92, 0.90) 40%,
+      rgba(235, 175, 120, 0.78)
+    ) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(255, 220, 180, 0.18),
+      inset -1px 0 0 rgba(80, 50, 20, 0.22),
+      inset 0 1px 0 rgba(255, 220, 180, 0.15),
+      0 0 6px rgba(212, 136, 92, 0.20);
+    border-radius: 1px 1px 0 0;
+    transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
 
-  /* ── Output bars / legend swatch: emerald → sage green ───────────────── */
+  /* ── Output bars: sage with vertical gradient + inner highlight ───────── */
   [class*="bg-emerald-500"] {
     background-color: #B8D4A0 !important;
   }
   [class*="bg-emerald-500/70"] {
-    background-color: rgba(184, 212, 160, 0.70) !important;
+    background: linear-gradient(
+      to top,
+      rgba(140, 180, 110, 0.78),
+      rgba(184, 212, 160, 0.88) 40%,
+      rgba(210, 235, 190, 0.72)
+    ) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(230, 255, 210, 0.18),
+      inset -1px 0 0 rgba(60, 90, 40, 0.20),
+      inset 0 1px 0 rgba(230, 255, 210, 0.14),
+      0 0 6px rgba(184, 212, 160, 0.15);
+    border-radius: 0;
+    transition: filter 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  /* ── Bar hover: brighten + intensify glow on column hover ────────────── */
+  .group:hover > [class*="bg-[#ffe6cb]/70"] {
+    filter: brightness(1.15);
+    box-shadow:
+      inset 1px 0 0 rgba(255, 220, 180, 0.25),
+      inset -1px 0 0 rgba(80, 50, 20, 0.25),
+      inset 0 1px 0 rgba(255, 220, 180, 0.22),
+      0 0 14px rgba(212, 136, 92, 0.35);
+  }
+  .group:hover > [class*="bg-emerald-500/70"] {
+    filter: brightness(1.12);
+    box-shadow:
+      inset 1px 0 0 rgba(230, 255, 210, 0.25),
+      inset -1px 0 0 rgba(60, 90, 40, 0.25),
+      inset 0 1px 0 rgba(230, 255, 210, 0.22),
+      0 0 14px rgba(184, 212, 160, 0.30);
+  }
+
+  /* ── Chart container: subtle topographic grid + olive vignette ────────── */
+  .group:first-child {
+    position: relative;
+  }
+  .group:first-child::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 4px;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 23px,
+        rgba(140, 160, 120, 0.06) 24px
+      ),
+      linear-gradient(180deg, rgba(28, 34, 22, 0.10), transparent 60%);
+  }
+
+  /* ── Column hover: faint terracotta glow background ──────────────────── */
+  .group:hover {
+    background: linear-gradient(
+      to top,
+      rgba(212, 136, 92, 0.06),
+      transparent 70%
+    );
+  }
+
+  /* ── Tooltip: premium dark card with terracotta accent border ────────── */
+  .group > .absolute .bg-card {
+    background: linear-gradient(135deg, rgba(28, 34, 22, 0.97), rgba(18, 22, 12, 0.98)) !important;
+    border-color: rgba(212, 136, 92, 0.30) !important;
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.50),
+      0 0 0 1px rgba(212, 136, 92, 0.12),
+      0 0 20px rgba(212, 136, 92, 0.08) !important;
+    border-radius: 4px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #DDD8B8 !important;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  /* ── Tooltip date line: terracotta accent ────────────────────────────── */
+  .group > .absolute .bg-card .font-medium {
+    color: #D4885C !important;
+    border-bottom: 1px solid rgba(212, 136, 92, 0.15);
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── X-axis date labels: olive-mono styling ──────────────────────────── */
+  .text-\\[10px\\].text-muted-foreground.flex.justify-between {
+    font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+    color: rgba(160, 176, 144, 0.65);
+    letter-spacing: 0.04em;
+    padding-top: 6px;
+    border-top: 1px solid rgba(140, 160, 120, 0.12);
+  }
+
+  /* ── Legend swatches: rounded with glow + gradient fill ───────────────── */
+  .h-2\\.5.w-2\\.5.bg-\\[\\#ffe6cb\\] {
+    background: linear-gradient(135deg, #D4885C, #E8A878) !important;
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(212, 136, 92, 0.30);
+  }
+  .h-2\\.5.w-2\\.5.bg-emerald-500 {
+    background: linear-gradient(135deg, #9CC480, #B8D4A0) !important;
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(184, 212, 160, 0.30);
+  }
+
+  /* ── Legend text: uppercase tracking, muted sage ──────────────────────── */
+  .flex.items-center.gap-4.text-xs.text-muted-foreground {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  /* ── Bar entrance animation: staggered grow-up ───────────────────────── */
+  @keyframes garrison-bar-grow {
+    0%   { transform: scaleY(0); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  .flex.items-end.gap-\\[2px\\] > .group > [class*="bg-"] {
+    transform-origin: bottom;
+    animation: garrison-bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .flex.items-end.gap-\\[2px\\] > .group:nth-child(odd) > [class*="bg-"] {
+    animation-delay: 0.05s;
+  }
+  .flex.items-end.gap-\\[2px\\] > .group:nth-child(3n) > [class*="bg-"] {
+    animation-delay: 0.08s;
   }
 
   /* ── Table text: input peach → terracotta ────────────────────────────── */
