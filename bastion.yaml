@@ -55,6 +55,11 @@ colorOverrides:
   secondary: "#2C3621"
   secondaryForeground: "#9FAE97"
 
+
+# ─── Assets ───────────────────────────────────────────────────────────────────
+# Custom background image: gold/blue glitter bokeh with shallow depth of field
+assets:
+  bg: "/ds-assets/011bg.png"
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
   card:

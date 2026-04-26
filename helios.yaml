@@ -68,6 +68,11 @@ colorOverrides:
   popover: "#141E28"
   popoverForeground: "#F5F0E8"
 
+
+# ─── Assets ───────────────────────────────────────────────────────────────────
+# Custom background image: layered liquid splashes (lime, dark, electric blue)
+assets:
+  bg: "/ds-assets/010bg.png"
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
   card:

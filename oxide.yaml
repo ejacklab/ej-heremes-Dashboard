@@ -53,6 +53,11 @@ colorOverrides:
   popover: "#1A1C12"
   popoverForeground: "#F2F2F0"
 
+
+# ─── Assets ───────────────────────────────────────────────────────────────────
+# Custom background image: aurora night sky with electric blue, violet, stars
+assets:
+  bg: "/ds-assets/012bg.png"
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
   card:
