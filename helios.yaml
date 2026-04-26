@@ -72,7 +72,7 @@ colorOverrides:
 # ─── Assets ───────────────────────────────────────────────────────────────────
 # Custom background image: layered liquid splashes (lime, dark, electric blue)
 assets:
-  bg: "/ds-assets/010bg.png"
+  bg: "/ds-assets/002bg.png"
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
   card:

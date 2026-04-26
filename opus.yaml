@@ -71,7 +71,7 @@ colorOverrides:
 # ─── Assets ───────────────────────────────────────────────────────────────────
 # Custom background image: flowing golden energy form with star particles
 assets:
-  bg: "/ds-assets/009bg.png"
+  bg: "/ds-assets/004bg.png"
 
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
