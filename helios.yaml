@@ -474,19 +474,21 @@ customCSS: |
     font-size: 0.875rem !important;
   }
 
-  /* ── ANALYTICS: Chart color overrides (emerald → blue-teal, cream → amber) */
-  .h-2\.5.w-2\.5.bg-emerald-500,
-  .w-full.bg-emerald-500\/70 {
-    background: #00B4D8 !important;
-  }
-  .h-2\.5.w-2\.5.bg-\[\#ffe6cb\],
-  .w-full.bg-\[\#ffe6cb\]\/70 {
+  /* ── ANALYTICS: Chart color overrides (scoped, amber input + blue output) ── */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) [class~="bg-[#ffe6cb]"],
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) [class~="bg-[#ffe6cb]/70"] {
     background: #F5A623 !important;
   }
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) [class~="bg-emerald-500"],
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) [class~="bg-emerald-500/70"] {
+    background: #00B4D8 !important;
+  }
 
-  /* ══ DAILY TOKEN CHART — Full enhancement (Codex GPT-5.5 review) ═══════ */
+  /* ══ DAILY TOKEN CHART — Simple 3D Topographic Bars (customCSS only) ═════ */
+  /* Hermes extension rule: chart bars are page-level DOM, so customCSS is the
+     right layer. No plugin, source patch, or componentStyles bucket needed. */
 
-  /* Chart card: stronger border, amber icon, readable title */
+  /* Chart card + legend */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) {
     border-color: rgba(143, 164, 184, 0.45) !important;
   }
@@ -497,14 +499,12 @@ customCSS: |
     color: #F5F0E8 !important;
     font-size: 1rem !important;
   }
-
-  /* Legend: larger swatches, amber + blue-teal, readable text */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .flex.items-center.gap-4.text-xs.text-muted-foreground {
     color: #F5F0E8 !important;
     font-size: 0.9375rem !important;
     gap: 1.25rem !important;
   }
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .h-2\.5.w-2\.5.bg-\[\#ffe6cb\] {
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .h-2\.5.w-2\.5[class~="bg-[#ffe6cb]"] {
     width: 0.875rem !important;
     height: 0.875rem !important;
     background: #F5A623 !important;
@@ -519,27 +519,20 @@ customCSS: |
     box-shadow: 0 0 0 1px #141E28, 0 0 0 2px #00B4D8 !important;
   }
 
-  /* Chart field: horizontal grid lines + wider bar gap + scrollable for 90d */
+  /* Chart field: one subtle topographic grid + vignette; no duplicate backgrounds. */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) > div > .flex.items-end.gap-\[2px\] {
     gap: 3px !important;
     position: relative !important;
-    background-image: repeating-linear-gradient(
-      to top,
-      rgba(143, 164, 184, 0.20) 0,
-      rgba(143, 164, 184, 0.20) 1px,
-      transparent 1px,
-      transparent 40px
-    ) !important;
+    isolation: isolate !important;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(143, 164, 184, 0.12) 40px),
+      linear-gradient(180deg, rgba(10, 10, 20, 0.15), transparent 60%) !important;
     background-position: left bottom !important;
   }
-
-  /* Scrollable container for dense 30d/90d charts */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) > .p-4 {
     overflow-x: auto !important;
     overflow-y: visible !important;
   }
-
-  /* Bar hover: amber rail on hovered day */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end {
     min-width: 0.5rem !important;
     cursor: crosshair !important;
@@ -560,70 +553,20 @@ customCSS: |
     opacity: 1 !important;
   }
 
-  /* ══ DAILY TOKEN CHART — 3D Gradient Bars (5-layer technique) ════════════ */
-
-  /* Container: topographic grid + vignette behind bars */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) > div > .flex.items-end.gap-\[2px\] {
-    position: relative !important;
-    isolation: isolate !important;
-    background-image:
-      repeating-linear-gradient(
-        0deg,
-        transparent 0px,
-        transparent 39px,
-        rgba(143, 164, 184, 0.12) 40px
-      ),
-      linear-gradient(180deg, rgba(10, 10, 20, 0.15), transparent 60%) !important;
-    background-position: left bottom !important;
-  }
-
-  /* Shared bar base: positioning + entrance animation + transition */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full {
+  /* ── INPUT BARS — amber, second child after tooltip ─────────────────────── */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:nth-child(2) {
     position: relative !important;
     z-index: 1 !important;
     transform-origin: bottom !important;
-    transition: filter 150ms ease-out, box-shadow 150ms ease-out !important;
-  }
-
-  /* Layer 1+2: Input bars — vertical cylinder gradient + inner shadows */
-  /* Input is 2nd child (after hidden tooltip div) */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:nth-child(2) {
-    background: linear-gradient(
-      to top,
-      #B87210 0%,
-      #D48A10 15%,
-      #F5A623 45%,
-      #FFD27A 85%,
-      #FFE8B0 100%
-    ) !important;
+    background: linear-gradient(to top, #B87210 0%, #D48A10 15%, #F5A623 45%, #FFD27A 85%, #FFE8B0 100%) !important;
     box-shadow:
       inset 1px 0 0 rgba(255, 230, 180, 0.22),
       inset -1px 0 0 rgba(80, 50, 10, 0.28),
       inset 0 1px 0 rgba(255, 230, 180, 0.18),
       0 0 8px rgba(245, 166, 35, 0.22) !important;
     border-radius: 2px 2px 0 0 !important;
+    transition: filter 150ms ease-out, box-shadow 150ms ease-out !important;
   }
-
-  /* Layer 1+2: Output bars — vertical cylinder gradient + inner shadows */
-  /* Output is last child (tooltip=1st, input=2nd, output=3rd) */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child) {
-    background: linear-gradient(
-      to top,
-      #006E88 0%,
-      #0090B0 15%,
-      #00B4D8 45%,
-      #33D4E8 85%,
-      #69DFF2 100%
-    ) !important;
-    box-shadow:
-      inset 1px 0 0 rgba(100, 220, 240, 0.20),
-      inset -1px 0 0 rgba(0, 50, 70, 0.26),
-      inset 0 1px 0 rgba(100, 220, 240, 0.15),
-      0 0 8px rgba(0, 180, 216, 0.20) !important;
-    border-radius: 0 0 2px 2px !important;
-  }
-
-  /* Layer 3: Hover — brightness up + glow expands */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:hover > .w-full:nth-child(2) {
     filter: brightness(1.15) !important;
     box-shadow:
@@ -631,6 +574,21 @@ customCSS: |
       inset -1px 0 0 rgba(80, 50, 10, 0.30),
       inset 0 1px 0 rgba(255, 230, 180, 0.25),
       0 0 16px rgba(245, 166, 35, 0.38) !important;
+  }
+
+  /* ── OUTPUT BARS — blue-teal, last child after tooltip + input ──────────── */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child) {
+    position: relative !important;
+    z-index: 1 !important;
+    transform-origin: bottom !important;
+    background: linear-gradient(to top, #006E88 0%, #0090B0 15%, #00B4D8 45%, #33D4E8 85%, #69DFF2 100%) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(100, 220, 240, 0.20),
+      inset -1px 0 0 rgba(0, 50, 70, 0.26),
+      inset 0 1px 0 rgba(100, 220, 240, 0.15),
+      0 0 8px rgba(0, 180, 216, 0.20) !important;
+    border-radius: 0 0 2px 2px !important;
+    transition: filter 150ms ease-out, box-shadow 150ms ease-out !important;
   }
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:hover > .w-full:last-child:not(:first-child) {
     filter: brightness(1.15) !important;
@@ -641,26 +599,29 @@ customCSS: |
       0 0 16px rgba(0, 180, 216, 0.35) !important;
   }
 
-  /* Layer 5: Entrance animation — grows from baseline */
+  /* Entrance animation targets bars only, not the hidden tooltip child. */
   @keyframes helios-bar-grow {
     0%   { transform: scaleY(0); opacity: 0; }
     60%  { opacity: 1; }
     100% { transform: scaleY(1); opacity: 1; }
   }
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full {
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:nth-child(2),
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child) {
     animation: helios-bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both !important;
   }
-  /* Stagger: odd columns +50ms, every 3rd +80ms */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(odd) > .w-full {
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(odd) > .w-full:nth-child(2),
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(odd) > .w-full:last-child:not(:first-child) {
     animation-delay: 0.05s !important;
   }
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(3n) > .w-full {
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(3n) > .w-full:nth-child(2),
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(3n) > .w-full:last-child:not(:first-child) {
     animation-delay: 0.08s !important;
   }
-  /* Reduced motion: disable animation */
   @media (prefers-reduced-motion: reduce) {
-    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full {
+    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:nth-child(2),
+    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child) {
       animation: none !important;
+      transition: none !important;
     }
   }
 
