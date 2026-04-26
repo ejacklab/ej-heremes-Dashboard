@@ -278,7 +278,7 @@ customCSS: |
     color: #FF6B35 !important;
   }
 
-  /* ── Wave 2: Bar chart — 3D gradient bars (Garrison pattern) ────────────── */
+    /* ── Wave 2: Bar chart — 3D gradient bars (Claude Code enhanced) ───────── */
   /* NOTE: These selectors target internal Tailwind classes (bg-[#ffe6cb], bg-emerald-500).
      They may break if the dashboard renames these classes in future updates. */
   @keyframes barGrowUp {
@@ -286,73 +286,121 @@ customCSS: |
     to   { transform: scaleY(1); opacity: 1; }
   }
 
-  /* Gold input bars — fallback + 3D gradient */
+  /* Wave 1: Prefers-reduced-motion guard (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce) {
+    [class*="bg-[#ffe6cb]/70"],
+    [class*="bg-emerald-500/70"] {
+      animation: none !important;
+    }
+  }
+
+  /* ── Gold input bars — fallback + 3D gradient ─────────────────────────── */
   [class*="bg-[#ffe6cb]"]:not([class*="/"]) {
     background-color: #F5E0B0 !important;
   }
-  [class*="bg-[#ffe6cb]/70"][class*="bg-[#ffe6cb]/70"] {
+  .recharts-wrapper [class*="bg-[#ffe6cb]/70"],
+  [class*="BarChart"] [class*="bg-[#ffe6cb]/70"] {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(
       to top,
-      rgba(180, 160, 100, 0.82),
-      rgba(245, 224, 176, 0.90) 40%,
-      rgba(255, 240, 200, 0.78)
+      rgba(180, 160, 100, 1.0),
+      rgba(245, 224, 176, 1.0) 40%,
+      rgba(255, 244, 210, 1.0)
     );
     box-shadow:
-      inset 1px 0 0 rgba(255, 240, 200, 0.18),
-      inset -1px 0 0 rgba(120, 100, 60, 0.22),
-      inset 0 1px 0 rgba(255, 240, 200, 0.15),
-      0 0 6px rgba(245, 224, 176, 0.20);
-    border-radius: 1px 1px 0 0;
+      inset 2px 0 0 rgba(255, 244, 210, 0.45),
+      inset -2px 0 0 rgba(100, 80, 40, 0.40),
+      inset 0 2px 0 rgba(255, 244, 210, 0.35),
+      0 3px 10px rgba(0, 0, 0, 0.40),
+      0 0 8px rgba(245, 224, 176, 0.22);
+    border-radius: 2px 2px 0 0;
     animation: barGrowUp 0.5s ease-out forwards;
     transform-origin: bottom;
     transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
+  /* Wave 3: Specular streak — light reflection on top 25% */
+  .recharts-wrapper [class*="bg-[#ffe6cb]/70"]::before,
+  [class*="BarChart"] [class*="bg-[#ffe6cb]/70"]::before {
+    content: "";
+    position: absolute;
+    inset: 0 20% 75% 20%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.18),
+      transparent
+    );
+    border-radius: 0 0 50% 50%;
+    pointer-events: none;
+  }
 
-  /* Teal output bars — fallback + 3D gradient */
+  /* ── Teal output bars — fallback + 3D gradient ────────────────────────── */
   [class*="bg-emerald-500"]:not([class*="/"]) {
     background-color: #2DD4BF !important;
   }
-  [class*="bg-emerald-500/70"][class*="bg-emerald-500/70"] {
+  .recharts-wrapper [class*="bg-emerald-500/70"],
+  [class*="BarChart"] [class*="bg-emerald-500/70"] {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(
       to top,
-      rgba(30, 160, 150, 0.78),
-      rgba(45, 212, 191, 0.88) 40%,
-      rgba(100, 255, 240, 0.72)
+      rgba(30, 160, 150, 1.0),
+      rgba(45, 212, 191, 1.0) 40%,
+      rgba(100, 255, 240, 1.0)
     );
     box-shadow:
-      inset 1px 0 0 rgba(100, 255, 240, 0.18),
-      inset -1px 0 0 rgba(20, 100, 95, 0.20),
-      inset 0 1px 0 rgba(100, 255, 240, 0.14),
-      0 0 6px rgba(45, 212, 191, 0.15);
-    border-radius: 0;
+      inset 2px 0 0 rgba(100, 255, 240, 0.35),
+      inset -2px 0 0 rgba(20, 100, 95, 0.35),
+      inset 0 2px 0 rgba(100, 255, 240, 0.28),
+      0 3px 10px rgba(0, 0, 0, 0.40),
+      0 0 8px rgba(45, 212, 191, 0.18);
+    border-radius: 2px 2px 0 0;
     animation: barGrowUp 0.5s ease-out forwards;
     transform-origin: bottom;
     transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
+  /* Wave 3: Specular streak — light reflection on top 25% */
+  .recharts-wrapper [class*="bg-emerald-500/70"]::before,
+  [class*="BarChart"] [class*="bg-emerald-500/70"]::before {
+    content: "";
+    position: absolute;
+    inset: 0 20% 75% 20%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.14),
+      transparent
+    );
+    border-radius: 0 0 50% 50%;
+    pointer-events: none;
+  }
 
-  /* Bar hover: brighten + intensify glow (scoped to chart column) */
-  .group:hover > [class*="bg-[#ffe6cb]/70"] {
+  /* ── Bar hover: brighten + intensify glow (scoped to chart column) ────── */
+  .group:hover > .recharts-wrapper [class*="bg-[#ffe6cb]/70"],
+  .group:hover > [class*="BarChart"] [class*="bg-[#ffe6cb]/70"] {
     filter: brightness(1.15);
     box-shadow:
-      inset 1px 0 0 rgba(255, 240, 200, 0.25),
-      inset -1px 0 0 rgba(120, 100, 60, 0.25),
-      inset 0 1px 0 rgba(255, 240, 200, 0.22),
-      0 0 14px rgba(245, 224, 176, 0.35);
+      inset 2px 0 0 rgba(255, 244, 210, 0.55),
+      inset -2px 0 0 rgba(100, 80, 40, 0.45),
+      inset 0 2px 0 rgba(255, 244, 210, 0.45),
+      0 3px 14px rgba(0, 0, 0, 0.50),
+      0 0 16px rgba(245, 224, 176, 0.35);
   }
-  .group:hover > [class*="bg-emerald-500/70"] {
+  .group:hover > .recharts-wrapper [class*="bg-emerald-500/70"],
+  .group:hover > [class*="BarChart"] [class*="bg-emerald-500/70"] {
     filter: brightness(1.12);
     box-shadow:
-      inset 1px 0 0 rgba(100, 255, 240, 0.25),
-      inset -1px 0 0 rgba(20, 100, 95, 0.25),
-      inset 0 1px 0 rgba(100, 255, 240, 0.22),
-      0 0 14px rgba(45, 212, 191, 0.30);
+      inset 2px 0 0 rgba(100, 255, 240, 0.50),
+      inset -2px 0 0 rgba(20, 100, 95, 0.45),
+      inset 0 2px 0 rgba(100, 255, 240, 0.40),
+      0 3px 14px rgba(0, 0, 0, 0.50),
+      0 0 16px rgba(45, 212, 191, 0.30);
   }
 
   /* Legend swatches — Aureus palette */
-  .h-2\\.5.w-2\\.5.bg-\\[\\#ffe6cb\\] {
+  .h-2\.5.w-2\.5.bg-\[\#ffe6cb\] {
     background-color: #F5E0B0;
   }
-  .h-2\\.5.w-2\\.5.bg-emerald-500 {
+  .h-2\.5.w-2\.5.bg-emerald-500 {
     background-color: #2DD4BF;
   }
 
@@ -365,7 +413,7 @@ customCSS: |
   }
 
   /* ── Wave 2: Chart tooltip — gold border + blur ─────────────────────────── */
-  .bg-card.border.border-border.px-2\\.5 {
+  .bg-card.border.border-border.px-2\.5 {
     border-color: rgba(245, 224, 176, 0.30) !important;
     backdrop-filter: blur(8px);
     background: rgba(18, 30, 48, 0.95) !important;

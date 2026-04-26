@@ -117,11 +117,12 @@ customCSS: |
     background: rgba(245, 166, 35, 0.08);
   }
 
-  /* ── Chart bars: amber primary series with blue secondary glow ───────────── */
-  .recharts-wrapper .recharts-bar-rectangle path,
-  .recharts-wrapper [class*="bar-"]:not([class*="progress"]) rect {
+  /* ── Chart bars: amber primary with blue secondary (Recharts fallback) ──── */
+  /* Note: AnalyticsPage uses handmade HTML bars, not Recharts. These rules     */
+  /* are fallbacks for any Recharts-based charts from plugins or future pages.  */
+  .recharts-wrapper .recharts-bar-rectangle path {
     fill: #F5A623;
-    filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.40));
+    filter: drop-shadow(0 0 4px rgba(245, 166, 35, 0.28));
   }
 
   .recharts-wrapper .recharts-line path,
@@ -129,7 +130,7 @@ customCSS: |
   [class*="trend"] path {
     stroke: #4A9EFF;
     stroke-width: 2.5px;   /* Thicker lines — elder-friendly */
-    filter: drop-shadow(0 0 6px rgba(74, 158, 255, 0.38));
+    filter: drop-shadow(0 0 4px rgba(74, 158, 255, 0.28));
   }
 
   /* ── Table / list row hover and selection ────────────────────────────────── */
@@ -576,18 +577,17 @@ customCSS: |
     background-position: left bottom !important;
   }
 
-  /* Shared bar base: positioning + edge highlights + ambient glow */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70,
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
+  /* Shared bar base: positioning + entrance animation + transition */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full {
     position: relative !important;
     z-index: 1 !important;
     transform-origin: bottom !important;
-    animation: helios-bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both !important;
     transition: filter 150ms ease-out, box-shadow 150ms ease-out !important;
   }
 
   /* Layer 1+2: Input bars — vertical cylinder gradient + inner shadows */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70 {
+  /* Input is 2nd child (after hidden tooltip div) */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:nth-child(2) {
     background: linear-gradient(
       to top,
       #B87210 0%,
@@ -605,7 +605,8 @@ customCSS: |
   }
 
   /* Layer 1+2: Output bars — vertical cylinder gradient + inner shadows */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
+  /* Output is last child (tooltip=1st, input=2nd, output=3rd) */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full:last-child:not(:first-child) {
     background: linear-gradient(
       to top,
       #006E88 0%,
@@ -623,7 +624,7 @@ customCSS: |
   }
 
   /* Layer 3: Hover — brightness up + glow expands */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .bg-\[\#ffe6cb\]\/70 {
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:hover > .w-full:nth-child(2) {
     filter: brightness(1.15) !important;
     box-shadow:
       inset 1px 0 0 rgba(255, 230, 180, 0.30),
@@ -631,7 +632,7 @@ customCSS: |
       inset 0 1px 0 rgba(255, 230, 180, 0.25),
       0 0 16px rgba(245, 166, 35, 0.38) !important;
   }
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .bg-emerald-500\/70 {
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:hover > .w-full:last-child:not(:first-child) {
     filter: brightness(1.15) !important;
     box-shadow:
       inset 1px 0 0 rgba(100, 220, 240, 0.28),
@@ -640,24 +641,27 @@ customCSS: |
       0 0 16px rgba(0, 180, 216, 0.35) !important;
   }
 
-  /* Layer 5: Staggered entrance animation */
+  /* Layer 5: Entrance animation — grows from baseline */
   @keyframes helios-bar-grow {
     0%   { transform: scaleY(0); opacity: 0; }
     60%  { opacity: 1; }
     100% { transform: scaleY(1); opacity: 1; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70,
-    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
-      animation: none !important;
-    }
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full {
+    animation: helios-bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both !important;
   }
-  /* Stagger: odd → 50ms, every 3rd → 80ms */
+  /* Stagger: odd columns +50ms, every 3rd +80ms */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(odd) > .w-full {
     animation-delay: 0.05s !important;
   }
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(3n) > .w-full {
     animation-delay: 0.08s !important;
+  }
+  /* Reduced motion: disable animation */
+  @media (prefers-reduced-motion: reduce) {
+    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group > .w-full {
+      animation: none !important;
+    }
   }
 
   /* Tooltip: amber border, larger text, tabular-nums, color-coded rows */
