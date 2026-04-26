@@ -281,15 +281,46 @@ customCSS: |
     color: #FF6B35 !important;
   }
 
-  /* ── Wave 2: Bar chart hardcoded color overrides ─────────────────────────── */
-  .bg-\[\#ffe6cb\],
-  .bg-\[\#ffe6cb\]\/70 {
-    background-color: rgba(245, 224, 176, 0.70) !important;
+  /* ── Wave 2: Bar chart — gradient + glow + animation ────────────────────── */
+  @keyframes barGrowUp {
+    from { transform: scaleY(0); opacity: 0.4; }
+    to   { transform: scaleY(1); opacity: 1; }
+  }
+
+  .bg-\\[\\#ffe6cb\\],
+  .bg-\\[\\#ffe6cb\\]\\/70 {
+    background: linear-gradient(to top, #F5E0B0, rgba(245, 224, 176, 0.65)) !important;
+    box-shadow: 0 0 6px 1px rgba(245, 224, 176, 0.20) !important;
+    animation: barGrowUp 0.5s ease-out forwards;
+    transform-origin: bottom;
+    border-radius: 2px 2px 0 0;
+    transition: filter 0.2s ease;
+  }
+  .bg-\\[\\#ffe6cb\\]:hover,
+  .bg-\\[\\#ffe6cb\\]\\/70:hover {
+    filter: brightness(1.15);
   }
 
   .bg-emerald-500,
-  .bg-emerald-500\/70 {
-    background-color: rgba(45, 212, 191, 0.70) !important;
+  .bg-emerald-500\\/70 {
+    background: linear-gradient(to top, #2DD4BF, rgba(45, 212, 191, 0.65)) !important;
+    box-shadow: 0 0 6px 1px rgba(45, 212, 191, 0.20) !important;
+    animation: barGrowUp 0.5s ease-out forwards;
+    transform-origin: bottom;
+    transition: filter 0.2s ease;
+  }
+  .bg-emerald-500:hover,
+  .bg-emerald-500\\/70:hover {
+    filter: brightness(1.15);
+  }
+
+  /* ── Wave 2: Chart tooltip — gold border + blur ─────────────────────────── */
+  .bg-card.border.border-border.px-2\\.5 {
+    border-color: rgba(245, 224, 176, 0.30) !important;
+    backdrop-filter: blur(8px);
+    background: rgba(18, 30, 48, 0.95) !important;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.30);
   }
 
   /* ── Wave 2: Hardcoded amber text override ───────────────────────────────── */
