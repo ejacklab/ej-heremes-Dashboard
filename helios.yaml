@@ -559,42 +559,39 @@ customCSS: |
     opacity: 1 !important;
   }
 
-  /* Bars: 3D gradient effect — solid fills with depth illusion */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70 {
-    background: linear-gradient(
-      to bottom,
-      #FFD08A 0%,
-      #F5A623 40%,
-      #D48A10 100%
-    ) !important;
-    box-shadow:
-      inset -2px 0 0 rgba(255, 255, 255, 0.15),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.25),
-      2px 2px 0 rgba(0, 0, 0, 0.30) !important;
-    border-radius: 2px 2px 0 0 !important;
+  /* Bars: 3D gradient effect — dual-axis gradients for realistic depth */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .flex.items-end.gap-\[2px\] {
     position: relative !important;
+    isolation: isolate !important;
   }
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70,
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
-    background: linear-gradient(
-      to bottom,
-      #33D4E8 0%,
-      #00B4D8 40%,
-      #0090B0 100%
-    ) !important;
-    box-shadow:
-      inset -2px 0 0 rgba(255, 255, 255, 0.10),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.30),
-      2px 2px 0 rgba(0, 0, 0, 0.30) !important;
-    border-radius: 0 0 2px 2px !important;
     position: relative !important;
-  }
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .w-full {
-    filter: brightness(1.20) saturate(1.10) !important;
+    z-index: 1 !important;
     box-shadow:
-      inset -2px 0 0 rgba(255, 255, 255, 0.22),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.20),
-      2px 2px 0 rgba(0, 0, 0, 0.35),
-      0 0 12px rgba(245, 166, 35, 0.25) !important;
+      inset 1px 0 0 rgba(255, 255, 255, 0.20),
+      inset -1px 0 0 rgba(10, 10, 20, 0.45) !important;
+    transition: filter 120ms ease-out, box-shadow 120ms ease-out !important;
+  }
+  /* Input: Helios amber — vertical gradient + horizontal light/shadow overlay */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70 {
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 38%, rgba(10, 10, 20, 0.28) 100%),
+      linear-gradient(180deg, #FFD27A 0%, #F5A623 42%, #C77A00 100%) !important;
+    border-radius: 2px 2px 0 0 !important;
+  }
+  /* Output: Helios blue-teal — same dual-axis treatment */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%, rgba(10, 10, 20, 0.26) 100%),
+      linear-gradient(180deg, #69DFF2 0%, #00B4D8 44%, #007E99 100%) !important;
+    border-radius: 0 0 2px 2px !important;
+  }
+  /* Hover: brightness boost with reduced-motion respect */
+  @media (prefers-reduced-motion: no-preference) {
+    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .w-full {
+      filter: brightness(1.14) saturate(1.08) !important;
+    }
   }
 
   /* Tooltip: amber border, larger text, tabular-nums, color-coded rows */

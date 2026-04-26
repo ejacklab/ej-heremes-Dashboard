@@ -278,7 +278,7 @@ customCSS: |
     color: #FF6B35 !important;
   }
 
-  /* ── Wave 2: Bar chart — 3D gradient bars with depth ────────────────────── */
+  /* ── Wave 2: Bar chart — 3D gradient bars (Garrison pattern) ────────────── */
   /* NOTE: These selectors target internal Tailwind classes (bg-[#ffe6cb], bg-emerald-500).
      They may break if the dashboard renames these classes in future updates. */
   @keyframes barGrowUp {
@@ -286,61 +286,82 @@ customCSS: |
     to   { transform: scaleY(1); opacity: 1; }
   }
 
-  /* Gold input bars — 3D depth effect */
-  .bg-\\[\\#ffe6cb\\],
-  .bg-\\[\\#ffe6cb\\]\\/70 {
-    background: linear-gradient(to right,
-      rgba(180, 160, 100, 0.90),
-      #F5E0B0 20%,
-      #F5E0B0 70%,
-      rgba(180, 160, 100, 0.85)
+  /* Gold input bars — fallback + 3D gradient */
+  [class*="bg-[#ffe6cb]"] {
+    background-color: #F5E0B0 !important;
+  }
+  [class*="bg-[#ffe6cb]/70"] {
+    background: linear-gradient(
+      to top,
+      rgba(180, 160, 100, 0.82),
+      rgba(245, 224, 176, 0.90) 40%,
+      rgba(255, 240, 200, 0.78)
     ) !important;
-    border-top: 1px solid rgba(255, 240, 200, 0.50);
-    border-right: 1px solid rgba(180, 160, 100, 0.40);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-      0 0 8px 2px rgba(245, 224, 176, 0.18);
+      inset 1px 0 0 rgba(255, 240, 200, 0.18),
+      inset -1px 0 0 rgba(120, 100, 60, 0.22),
+      inset 0 1px 0 rgba(255, 240, 200, 0.15),
+      0 0 6px rgba(245, 224, 176, 0.20);
+    border-radius: 1px 1px 0 0;
     animation: barGrowUp 0.5s ease-out forwards;
     transform-origin: bottom;
-    border-radius: 2px 2px 0 0;
-    transition: filter 0.2s ease, box-shadow 0.2s ease;
-  }
-  .bg-\\[\\#ffe6cb\\]:hover,
-  .bg-\\[\\#ffe6cb\\]\\/70:hover {
-    filter: brightness(1.15);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-      0 0 14px 4px rgba(245, 224, 176, 0.30);
+    transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
 
-  /* Teal output bars — 3D depth effect */
-  .bg-emerald-500,
-  .bg-emerald-500\\/70 {
-    background: linear-gradient(to right,
-      rgba(30, 160, 150, 0.90),
-      #2DD4BF 20%,
-      #2DD4BF 70%,
-      rgba(30, 160, 150, 0.85)
+  /* Teal output bars — fallback + 3D gradient */
+  [class*="bg-emerald-500"] {
+    background-color: #2DD4BF !important;
+  }
+  [class*="bg-emerald-500/70"] {
+    background: linear-gradient(
+      to top,
+      rgba(30, 160, 150, 0.78),
+      rgba(45, 212, 191, 0.88) 40%,
+      rgba(100, 255, 240, 0.72)
     ) !important;
-    border-top: 1px solid rgba(100, 255, 240, 0.40);
-    border-right: 1px solid rgba(30, 160, 150, 0.35);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.20),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-      0 0 8px 2px rgba(45, 212, 191, 0.18);
+      inset 1px 0 0 rgba(100, 255, 240, 0.18),
+      inset -1px 0 0 rgba(20, 100, 95, 0.20),
+      inset 0 1px 0 rgba(100, 255, 240, 0.14),
+      0 0 6px rgba(45, 212, 191, 0.15);
+    border-radius: 0;
     animation: barGrowUp 0.5s ease-out forwards;
     transform-origin: bottom;
-    transition: filter 0.2s ease, box-shadow 0.2s ease;
+    transition: filter 0.25s ease, box-shadow 0.25s ease;
   }
-  .bg-emerald-500:hover,
-  .bg-emerald-500\\/70:hover {
+
+  /* Bar hover: brighten + intensify glow (scoped to chart column) */
+  .group:hover > [class*="bg-[#ffe6cb]/70"] {
     filter: brightness(1.15);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.30),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
-      0 0 14px 4px rgba(45, 212, 191, 0.30);
+      inset 1px 0 0 rgba(255, 240, 200, 0.25),
+      inset -1px 0 0 rgba(120, 100, 60, 0.25),
+      inset 0 1px 0 rgba(255, 240, 200, 0.22),
+      0 0 14px rgba(245, 224, 176, 0.35);
+  }
+  .group:hover > [class*="bg-emerald-500/70"] {
+    filter: brightness(1.12);
+    box-shadow:
+      inset 1px 0 0 rgba(100, 255, 240, 0.25),
+      inset -1px 0 0 rgba(20, 100, 95, 0.25),
+      inset 0 1px 0 rgba(100, 255, 240, 0.22),
+      0 0 14px rgba(45, 212, 191, 0.30);
+  }
+
+  /* Legend swatches — Aureus palette */
+  .h-2\\.5.w-2\\.5.bg-\\[\\#ffe6cb\\] {
+    background-color: #F5E0B0 !important;
+  }
+  .h-2\\.5.w-2\\.5.bg-emerald-500 {
+    background-color: #2DD4BF !important;
+  }
+
+  /* Table value colors */
+  [class*="text-[#ffe6cb]"] {
+    color: #F5E0B0 !important;
+  }
+  .text-emerald-400 {
+    color: #2DD4BF !important;
   }
 
   /* ── Wave 2: Chart tooltip — gold border + blur ─────────────────────────── */
