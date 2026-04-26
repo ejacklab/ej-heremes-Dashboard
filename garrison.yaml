@@ -56,7 +56,7 @@ colorOverrides:
 
 # ─── Assets ───────────────────────────────────────────────────────────────────
 assets:
-  bg: "/ds-assets/002bg.png"
+  bg: "/ds-assets/011bg.png"
 
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
@@ -343,4 +343,76 @@ customCSS: |
   /* ── Filter panel: warm border ─────────────────────────────────────────── */
   [data-page="config"] aside .border-border {
     border-color: rgba(140, 160, 120, 0.35) !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY FIXES — All tabs
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── KPI numbers: force DM Sans — prevent Mondwest faux-bold ────────── */
+  .text-2xl.font-bold {
+    font-family: "DM Sans", "Inter", system-ui, sans-serif !important;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── font-mondwest → DM Sans — Garrison doesn't bundle Mondwest ────── */
+  .font-mondwest {
+    font-family: "DM Sans", "Inter", system-ui, sans-serif !important;
+    letter-spacing: 0.06em;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CODE ELEMENTS — Config, Env, Cron, all tabs
+     Dark surface instead of cream (--midground fallback from index.css)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  code, kbd {
+    background: rgba(28, 34, 22, 0.90) !important;
+    color: #DDD8B8 !important;
+    border: 1px solid rgba(140, 160, 120, 0.25);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 0.85em;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ANALYTICS — Chart bars, legend swatches, table colors
+     Override hardcoded #ffe6cb (peach) and emerald to Garrison palette
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Input bars / legend swatch: peach → terracotta ──────────────────── */
+  [class*="bg-[#ffe6cb]"] {
+    background-color: #D4885C !important;
+  }
+  [class*="bg-[#ffe6cb]/70"] {
+    background-color: rgba(212, 136, 92, 0.70) !important;
+  }
+
+  /* ── Output bars / legend swatch: emerald → sage green ───────────────── */
+  [class*="bg-emerald-500"] {
+    background-color: #B8D4A0 !important;
+  }
+  [class*="bg-emerald-500/70"] {
+    background-color: rgba(184, 212, 160, 0.70) !important;
+  }
+
+  /* ── Table text: input peach → terracotta ────────────────────────────── */
+  [class*="text-[#ffe6cb]"] {
+    color: #D4885C !important;
+  }
+
+  /* ── Table text: output emerald → sage green ─────────────────────────── */
+  [class*="text-emerald-400"] {
+    color: #B8D4A0 !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SKILLS PAGE — Warning text fix
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── "Setup needed" warning: amber → terracotta ──────────────────────── */
+  .text-amber-300\/80 {
+    color: rgba(212, 136, 92, 0.85) !important;
   }
