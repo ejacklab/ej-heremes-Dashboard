@@ -72,7 +72,7 @@ colorOverrides:
 # ─── Assets ───────────────────────────────────────────────────────────────────
 # Custom background image: layered liquid splashes (lime, dark, electric blue)
 assets:
-  bg: "/ds-assets/003bg.png"
+  bg: "/ds-assets/010bg.png"
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
   card:
@@ -317,4 +317,298 @@ customCSS: |
   /* ── Cron tab: Section header — amber Clock icon ─────────────────────────── */
   .flex.items-center.gap-2.text-muted-foreground > .h-4.w-4 {
     color: #F5A623;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     HELIOS — Cross-Tab Readability Enhancements
+     Target: 50-year-old daily user, 2-4 hours/day
+     Codex GPT-5.5 review 2026-04-26
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* ── SHARED: Search inputs across Sessions, Skills, Config ──────────────── */
+  .relative.w-full.min-w-0 input.h-8.pl-8.pr-7.text-xs,
+  .relative.w-full.min-w-0.sm\:max-w-xs input.h-8.pl-8.pr-7.text-xs {
+    min-height: 44px !important;
+    height: 44px !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    padding-left: 2.75rem !important;
+    padding-right: 2.5rem !important;
+    color: #F5F0E8 !important;
+    background: #141E28 !important;
+    border-color: rgba(245, 166, 35, 0.40) !important;
+  }
+  .relative.w-full.min-w-0 input.h-8.pl-8.pr-7.text-xs::placeholder,
+  .relative.w-full.min-w-0.sm\:max-w-xs input.h-8.pl-8.pr-7.text-xs::placeholder {
+    color: #8FA4B8 !important;
+    opacity: 1 !important;
+  }
+  .relative.w-full.min-w-0 input.h-8.pl-8.pr-7.text-xs:focus-visible,
+  .relative.w-full.min-w-0.sm\:max-w-xs input.h-8.pl-8.pr-7.text-xs:focus-visible {
+    border-color: #F5A623 !important;
+    box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.28) !important;
+  }
+  .relative.w-full.min-w-0 svg.text-muted-foreground,
+  .relative.w-full.min-w-0.sm\:max-w-xs svg.text-muted-foreground {
+    color: #F5A623 !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .relative.w-full.min-w-0 button.absolute,
+  .relative.w-full.min-w-0.sm\:max-w-xs button.absolute {
+    min-width: 36px !important;
+    min-height: 36px !important;
+    display: grid !important;
+    place-items: center !important;
+    color: #8FA4B8 !important;
+  }
+  .relative.w-full.min-w-0 button.absolute:hover,
+  .relative.w-full.min-w-0.sm\:max-w-xs button.absolute:hover {
+    color: #F5F0E8 !important;
+    background: rgba(0, 180, 216, 0.12) !important;
+  }
+
+  /* ── SHARED: Tables across Analytics, Skills, Logs ──────────────────────── */
+  table.w-full.text-sm {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+  table.w-full.text-sm thead tr {
+    border-bottom-color: rgba(245, 166, 35, 0.35) !important;
+  }
+  table.w-full.text-sm thead tr th,
+  table.w-full.text-sm thead tr.text-xs th {
+    color: #F5F0E8 !important;
+    font-size: 0.875rem !important;
+    font-weight: 700 !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    line-height: 1.6 !important;
+  }
+  table.w-full.text-sm td {
+    padding-top: 0.625rem !important;
+    padding-bottom: 0.625rem !important;
+  }
+  table.w-full.text-sm tbody tr {
+    border-bottom-color: rgba(143, 164, 184, 0.18) !important;
+  }
+  table.w-full.text-sm tbody tr:hover {
+    background: rgba(245, 166, 35, 0.06) !important;
+  }
+  table.w-full.text-sm .text-muted-foreground {
+    color: #8FA4B8 !important;
+  }
+  table.w-full.text-sm .text-emerald-400 {
+    color: #00B4D8 !important;
+    font-weight: 600 !important;
+  }
+  table.w-full.text-sm .text-\[#ffe6cb\] {
+    color: #F5A623 !important;
+    font-weight: 600 !important;
+  }
+
+  /* ── SHARED: Buttons — minimum comfortable click targets ────────────────── */
+  button.h-7.text-xs {
+    min-height: 36px !important;
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* ── SHARED: Badge sizing floor ─────────────────────────────────────────── */
+  .inline-flex.items-center.border.px-2.py-0\.5.text-\[0\.65rem\] {
+    font-size: 0.8125rem !important;
+    padding: 0.25rem 0.625rem !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  /* ── SHARED: Tooltip readability ────────────────────────────────────────── */
+  .absolute.bottom-full .bg-card.border.border-border.px-2\.5.py-1\.5.text-\[10px\] {
+    background: #141E28 !important;
+    border-color: #F5A623 !important;
+    color: #F5F0E8 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  /* ── ANALYTICS: KPI cards ───────────────────────────────────────────────── */
+  .grid.gap-4.sm\:grid-cols-2.lg\:grid-cols-3 .text-sm.font-medium {
+    color: #F5F0E8 !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+  .grid.gap-4.sm\:grid-cols-2.lg\:grid-cols-3 .text-2xl.font-bold {
+    color: #F5A623 !important;
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+  .grid.gap-4.sm\:grid-cols-2.lg\:grid-cols-3 p.text-xs.text-muted-foreground {
+    color: #8FA4B8 !important;
+    font-size: 0.9375rem !important;
+  }
+  .grid.gap-4.sm\:grid-cols-2.lg\:grid-cols-3 svg.text-muted-foreground {
+    color: #00B4D8 !important;
+  }
+
+  /* ── ANALYTICS: Period selector buttons ─────────────────────────────────── */
+  .flex.w-full.min-w-0.flex-wrap.items-center.justify-end.gap-2 button.h-7 {
+    min-height: 2.5rem !important;
+    padding: 0 0.875rem !important;
+    font-size: 0.9375rem !important;
+  }
+
+  /* ── ANALYTICS: Chart legend and axis labels ────────────────────────────── */
+  .flex.items-center.gap-4.text-xs.text-muted-foreground {
+    color: #F5F0E8 !important;
+    font-size: 0.9375rem !important;
+  }
+  .flex.justify-between.mt-2.text-\[10px\].text-muted-foreground {
+    color: #8FA4B8 !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* ── ANALYTICS: Chart color overrides (emerald → blue-teal, cream → amber) */
+  .h-2\.5.w-2\.5.bg-emerald-500,
+  .w-full.bg-emerald-500\/70 {
+    background: #00B4D8 !important;
+  }
+  .h-2\.5.w-2\.5.bg-\[\#ffe6cb\],
+  .w-full.bg-\[\#ffe6cb\]\/70 {
+    background: #F5A623 !important;
+  }
+
+  /* ── LOGS: Log viewer — larger mono text, readable lines ────────────────── */
+  .font-mono-ui.text-xs.leading-5 {
+    font-size: 0.9375rem !important;
+    line-height: 1.75 !important;
+  }
+
+  /* ── LOGS: Filter toolbar — larger segmented controls ───────────────────── */
+  .h-7.px-2\.5.text-\[0\.725rem\] {
+    min-height: 36px !important;
+    font-size: 0.875rem !important;
+    padding: 0 0.875rem !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  /* ── LOGS: Auto-refresh switch ──────────────────────────────────────────── */
+  .h-5.w-9 {
+    min-height: 28px !important;
+    min-width: 48px !important;
+  }
+
+  /* ── CRON: Create form controls ─────────────────────────────────────────── */
+  label[for="cron-name"],
+  label[for="cron-prompt"],
+  label[for="cron-schedule"],
+  label[for="cron-deliver"] {
+    color: #F5A623 !important;
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+  }
+  #cron-name,
+  #cron-schedule,
+  #cron-deliver > button {
+    min-height: 44px !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    border-color: rgba(245, 166, 35, 0.38) !important;
+    background: rgba(20, 30, 40, 0.95) !important;
+    color: #F5F0E8 !important;
+  }
+  #cron-prompt {
+    min-height: 132px !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    padding: 0.75rem 0.875rem !important;
+    border-color: rgba(245, 166, 35, 0.38) !important;
+    background: rgba(20, 30, 40, 0.95) !important;
+    color: #F5F0E8 !important;
+    resize: vertical;
+  }
+  #cron-name::placeholder,
+  #cron-schedule::placeholder,
+  #cron-prompt::placeholder {
+    color: #8FA4B8 !important;
+    opacity: 1 !important;
+  }
+
+  /* ── CRON: Job card text hierarchy ──────────────────────────────────────── */
+  .font-medium.text-sm.truncate {
+    font-size: 0.9375rem !important;
+    color: #F5F0E8 !important;
+  }
+  p.text-xs.text-muted-foreground.truncate.mb-1 {
+    font-size: 0.875rem !important;
+    color: #8FA4B8 !important;
+  }
+  .flex.items-center.gap-4.text-xs.text-muted-foreground .font-mono {
+    font-size: 0.875rem !important;
+    color: #F5A623 !important;
+    font-weight: 500 !important;
+  }
+
+  /* ── CRON: Action buttons — visible targets ─────────────────────────────── */
+  .flex.items-center.gap-1.shrink-0 button[title] {
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+
+  /* ── SKILLS: Filter panel hierarchy ─────────────────────────────────────── */
+  .text-\[0\.7rem\] {
+    font-size: 0.875rem !important;
+  }
+  .text-\[0\.65rem\] {
+    font-size: 0.8125rem !important;
+  }
+  .text-\[10px\] {
+    font-size: 0.75rem !important;
+  }
+
+  /* ── SKILLS: Switch controls — blue-teal enabled state ──────────────────── */
+  button[role="switch"][data-state="checked"] {
+    background: #00B4D8 !important;
+  }
+
+  /* ── ENV/KEYS: Restore opacity on unset rows ────────────────────────────── */
+  .flex.items-center.justify-between.gap-3.py-1\.5.opacity-50,
+  .flex.items-center.justify-between.gap-3.border.border-border\/50.px-4.py-2\.5.opacity-60 {
+    opacity: 1 !important;
+  }
+  .flex.items-center.justify-between.gap-3.py-1\.5 .text-muted-foreground,
+  .flex.items-center.justify-between.gap-3.py-1\.5 .text-muted-foreground\/60,
+  .flex.items-center.justify-between.gap-3.border.border-border\/50 .text-muted-foreground,
+  .flex.items-center.justify-between.gap-3.border.border-border\/50 .text-muted-foreground\/60 {
+    color: #8FA4B8 !important;
+  }
+
+  /* ── ENV/KEYS: Key value display — readable mono ────────────────────────── */
+  .font-mono-ui.text-xs,
+  .font-mono-ui.text-\[0\.7rem\] {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ── ENV/KEYS: Collapsible chevrons — larger hit target ─────────────────── */
+  button svg.h-3.w-3,
+  button svg.h-2\.5.w-2\.5 {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* ── ENV/KEYS: Provider group headers ───────────────────────────────────── */
+  .text-sm.font-semibold {
+    font-size: 1rem !important;
+    color: #F5F0E8 !important;
+  }
+
+  /* ── ENV/KEYS: Action buttons (set/clear/reveal) ────────────────────────── */
+  button.h-6.text-\[0\.65rem\] {
+    min-height: 36px !important;
+    font-size: 0.8125rem !important;
+    padding: 0 0.75rem !important;
   }

@@ -71,7 +71,7 @@ colorOverrides:
 # ─── Assets ───────────────────────────────────────────────────────────────────
 # Custom background image: cosmic tree with golden highlights and cyan stars
 assets:
-  bg: "/ds-assets/001bg.png"
+  bg: "/ds-assets/008bg.png"
 
 # ─── Component chrome ─────────────────────────────────────────────────────────
 componentStyles:
@@ -97,6 +97,18 @@ componentStyles:
 
 # ─── Custom CSS ───────────────────────────────────────────────────────────────
 customCSS: |
+  /* ── Font preload: ensure Inter is loaded (DM Sans from prev theme sticks) ── */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  /* ── Font override: force Inter (DM Sans looks pixelized on data pages) ──── */
+  body,
+  body *:not([class*="font-mono"]):not(code):not(pre):not(kbd):not(samp) {
+    font-family: "Inter", "SF Pro Display", "IBM Plex Sans", system-ui, sans-serif !important;
+  }
+  code, pre, kbd, samp, [class*="font-mono"], .font-mono-ui {
+    font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace !important;
+  }
+
   /* ── Warm depth atmosphere — golden-tinged navy, gentle vignette ──────────── */
   body::before {
     content: "";
@@ -268,3 +280,106 @@ customCSS: |
   [class*="destructive"]:not([class*="Foreground"]):not([class*="background"]) {
     color: #FF6B35 !important;
   }
+
+  /* ── Wave 2: Bar chart hardcoded color overrides ─────────────────────────── */
+  .bg-\[\#ffe6cb\],
+  .bg-\[\#ffe6cb\]\/70 {
+    background-color: rgba(245, 224, 176, 0.70) !important;
+  }
+
+  .bg-emerald-500,
+  .bg-emerald-500\/70 {
+    background-color: rgba(45, 212, 191, 0.70) !important;
+  }
+
+  /* ── Wave 2: Hardcoded amber text override ───────────────────────────────── */
+  .text-amber-300\/80 {
+    color: #D8C080 !important;
+  }
+
+  /* ── Wave 2: Source icons in Sessions — warm-tone fallback for oklch ─────── */
+  [class*="source-icon"],
+  [class*="SourceIcon"],
+  [data-source-icon] {
+    color: #D8C080 !important;
+  }
+  [class*="source-icon"][class*="oklch"],
+  [class*="SourceIcon"][style*="oklch"],
+  [data-source-icon][style*="oklch"] {
+    color: #D8C080 !important;
+  }
+
+  /* ── Wave 2: Table value color overrides ─────────────────────────────────── */
+  .text-\[\#ffe6cb\] {
+    color: #F5E0B0 !important;
+  }
+
+  .text-emerald-400 {
+    color: #2DD4BF !important;
+  }
+
+  /* ── Wave 1: Active filter gold fill (config, skills, all filter sidebars) ─ */
+  [data-page="config"] aside button.bg-foreground\/10,
+  aside button.bg-foreground\/10 {
+    background: rgba(245, 224, 176, 0.12) !important;
+    color: #F5E0B0 !important;
+    border-left: 2px solid #F5E0B0;
+    padding-left: calc(0.5rem - 2px);
+  }
+
+  /* ── Wave 1: Gold section dividers ──────────────────────────────────────── */
+  .border-t.border-border {
+    border-color: rgba(245, 224, 176, 0.20) !important;
+  }
+    /* ── Wave 3 ─────────────────────────────────────────────────────────────────── */
+
+    /* 1. Error / warning prominence — orange left-border + faint glow */
+    .bg-destructive\/10,
+    [class*="bg-destructive/10"],
+    [class*="bg-destructive\\/10"],
+    [role="alert"] {
+      border-left: 2px solid #FF6B35 !important;
+      box-shadow: 0 0 8px rgba(255, 107, 53, 0.15);
+    }
+
+    .log-line[data-level="error"],
+    .log-line[data-classification="error"],
+    [data-log-level="error"],
+    [data-classification="error"] {
+      border-left: 2px solid #FF6B35;
+      box-shadow: 0 0 6px rgba(255, 107, 53, 0.12);
+    }
+
+    /* 2. Cron job states — visual cue by badge variant inside cards */
+    [class*="card"]:has([data-variant="success"]),
+    [class*="Card"]:has([data-variant="success"]) {
+      border-left: 3px solid #F5E0B0;
+      box-shadow: inset 3px 0 8px -2px rgba(245, 224, 176, 0.18);
+    }
+
+    [class*="card"]:has([data-variant="warning"]),
+    [class*="Card"]:has([data-variant="warning"]) {
+      opacity: 0.7;
+    }
+
+    [class*="card"]:has([data-variant="destructive"]),
+    [class*="Card"]:has([data-variant="destructive"]) {
+      border-left: 3px solid #FF6B35;
+      animation: destructive-pulse 2s infinite;
+    }
+
+    @keyframes destructive-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.50); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 53, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+    }
+
+    /* 3. Gold scrollbar — warm gold-tinted thumb */
+    ::-webkit-scrollbar-thumb {
+      background: rgba(245, 224, 176, 0.35);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(245, 224, 176, 0.55);
+    }
+
