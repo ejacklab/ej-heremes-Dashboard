@@ -287,16 +287,16 @@ customCSS: |
   }
 
   /* Gold input bars — fallback + 3D gradient */
-  [class*="bg-[#ffe6cb]"] {
+  [class*="bg-[#ffe6cb]"]:not([class*="/"]) {
     background-color: #F5E0B0 !important;
   }
-  [class*="bg-[#ffe6cb]/70"] {
+  [class*="bg-[#ffe6cb]/70"][class*="bg-[#ffe6cb]/70"] {
     background: linear-gradient(
       to top,
       rgba(180, 160, 100, 0.82),
       rgba(245, 224, 176, 0.90) 40%,
       rgba(255, 240, 200, 0.78)
-    ) !important;
+    );
     box-shadow:
       inset 1px 0 0 rgba(255, 240, 200, 0.18),
       inset -1px 0 0 rgba(120, 100, 60, 0.22),
@@ -309,16 +309,16 @@ customCSS: |
   }
 
   /* Teal output bars — fallback + 3D gradient */
-  [class*="bg-emerald-500"] {
+  [class*="bg-emerald-500"]:not([class*="/"]) {
     background-color: #2DD4BF !important;
   }
-  [class*="bg-emerald-500/70"] {
+  [class*="bg-emerald-500/70"][class*="bg-emerald-500/70"] {
     background: linear-gradient(
       to top,
       rgba(30, 160, 150, 0.78),
       rgba(45, 212, 191, 0.88) 40%,
       rgba(100, 255, 240, 0.72)
-    ) !important;
+    );
     box-shadow:
       inset 1px 0 0 rgba(100, 255, 240, 0.18),
       inset -1px 0 0 rgba(20, 100, 95, 0.20),
@@ -350,18 +350,18 @@ customCSS: |
 
   /* Legend swatches — Aureus palette */
   .h-2\\.5.w-2\\.5.bg-\\[\\#ffe6cb\\] {
-    background-color: #F5E0B0 !important;
+    background-color: #F5E0B0;
   }
   .h-2\\.5.w-2\\.5.bg-emerald-500 {
-    background-color: #2DD4BF !important;
+    background-color: #2DD4BF;
   }
 
   /* Table value colors */
   [class*="text-[#ffe6cb]"] {
-    color: #F5E0B0 !important;
+    color: #F5E0B0;
   }
   .text-emerald-400 {
-    color: #2DD4BF !important;
+    color: #2DD4BF;
   }
 
   /* ── Wave 2: Chart tooltip — gold border + blur ─────────────────────────── */
@@ -396,7 +396,7 @@ customCSS: |
   }
 
   .text-emerald-400 {
-    color: #2DD4BF !important;
+    color: #2DD4BF;
   }
 
   /* ── Wave 1: Active filter gold fill (config, skills, all filter sidebars) ─ */

@@ -559,39 +559,105 @@ customCSS: |
     opacity: 1 !important;
   }
 
-  /* Bars: 3D gradient effect — dual-axis gradients for realistic depth */
-  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .flex.items-end.gap-\[2px\] {
+  /* ══ DAILY TOKEN CHART — 3D Gradient Bars (5-layer technique) ════════════ */
+
+  /* Container: topographic grid + vignette behind bars */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) > div > .flex.items-end.gap-\[2px\] {
     position: relative !important;
     isolation: isolate !important;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 39px,
+        rgba(143, 164, 184, 0.12) 40px
+      ),
+      linear-gradient(180deg, rgba(10, 10, 20, 0.15), transparent 60%) !important;
+    background-position: left bottom !important;
   }
+
+  /* Shared bar base: positioning + edge highlights + ambient glow */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70,
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
     position: relative !important;
     z-index: 1 !important;
-    box-shadow:
-      inset 1px 0 0 rgba(255, 255, 255, 0.20),
-      inset -1px 0 0 rgba(10, 10, 20, 0.45) !important;
-    transition: filter 120ms ease-out, box-shadow 120ms ease-out !important;
+    transform-origin: bottom !important;
+    animation: helios-bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+    transition: filter 150ms ease-out, box-shadow 150ms ease-out !important;
   }
-  /* Input: Helios amber — vertical gradient + horizontal light/shadow overlay */
+
+  /* Layer 1+2: Input bars — vertical cylinder gradient + inner shadows */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70 {
-    background:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 38%, rgba(10, 10, 20, 0.28) 100%),
-      linear-gradient(180deg, #FFD27A 0%, #F5A623 42%, #C77A00 100%) !important;
+    background: linear-gradient(
+      to top,
+      #B87210 0%,
+      #D48A10 15%,
+      #F5A623 45%,
+      #FFD27A 85%,
+      #FFE8B0 100%
+    ) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(255, 230, 180, 0.22),
+      inset -1px 0 0 rgba(80, 50, 10, 0.28),
+      inset 0 1px 0 rgba(255, 230, 180, 0.18),
+      0 0 8px rgba(245, 166, 35, 0.22) !important;
     border-radius: 2px 2px 0 0 !important;
   }
-  /* Output: Helios blue-teal — same dual-axis treatment */
+
+  /* Layer 1+2: Output bars — vertical cylinder gradient + inner shadows */
   .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
-    background:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%, rgba(10, 10, 20, 0.26) 100%),
-      linear-gradient(180deg, #69DFF2 0%, #00B4D8 44%, #007E99 100%) !important;
+    background: linear-gradient(
+      to top,
+      #006E88 0%,
+      #0090B0 15%,
+      #00B4D8 45%,
+      #33D4E8 85%,
+      #69DFF2 100%
+    ) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(100, 220, 240, 0.20),
+      inset -1px 0 0 rgba(0, 50, 70, 0.26),
+      inset 0 1px 0 rgba(100, 220, 240, 0.15),
+      0 0 8px rgba(0, 180, 216, 0.20) !important;
     border-radius: 0 0 2px 2px !important;
   }
-  /* Hover: brightness boost with reduced-motion respect */
-  @media (prefers-reduced-motion: no-preference) {
-    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .w-full {
-      filter: brightness(1.14) saturate(1.08) !important;
+
+  /* Layer 3: Hover — brightness up + glow expands */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .bg-\[\#ffe6cb\]\/70 {
+    filter: brightness(1.15) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(255, 230, 180, 0.30),
+      inset -1px 0 0 rgba(80, 50, 10, 0.30),
+      inset 0 1px 0 rgba(255, 230, 180, 0.25),
+      0 0 16px rgba(245, 166, 35, 0.38) !important;
+  }
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group.relative.flex.flex-col.justify-end:hover > .bg-emerald-500\/70 {
+    filter: brightness(1.15) !important;
+    box-shadow:
+      inset 1px 0 0 rgba(100, 220, 240, 0.28),
+      inset -1px 0 0 rgba(0, 50, 70, 0.30),
+      inset 0 1px 0 rgba(100, 220, 240, 0.22),
+      0 0 16px rgba(0, 180, 216, 0.35) !important;
+  }
+
+  /* Layer 5: Staggered entrance animation */
+  @keyframes helios-bar-grow {
+    0%   { transform: scaleY(0); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-\[\#ffe6cb\]\/70,
+    .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .w-full.bg-emerald-500\/70 {
+      animation: none !important;
     }
+  }
+  /* Stagger: odd → 50ms, every 3rd → 80ms */
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(odd) > .w-full {
+    animation-delay: 0.05s !important;
+  }
+  .border.border-border.bg-card\/80.text-card-foreground.w-full:has(.flex.items-end.gap-\[2px\]) .group:nth-child(3n) > .w-full {
+    animation-delay: 0.08s !important;
   }
 
   /* Tooltip: amber border, larger text, tabular-nums, color-coded rows */
