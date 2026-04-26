@@ -241,3 +241,15 @@ customCSS: |
     background: #B4DC14 !important;
     box-shadow: 0 0 8px rgba(180, 220, 20, 0.4);
   }
+
+  /* ── Daily Token Usage chart: match oxide palette ──────────────────────── */
+  /* Input bars: chartreuse instead of default peach */
+  .bg-\[\#ffe6cb\]\/70,
+  .bg-\[\#ffe6cb\] {
+    background-color: rgba(180, 220, 20, 0.70) !important;
+  }
+  /* Output bars: brighter lime instead of default emerald */
+  .bg-emerald-500\/70,
+  .bg-emerald-500 {
+    background-color: rgba(168, 232, 12, 0.70) !important;
+  }
