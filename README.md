@@ -19,6 +19,7 @@ Custom themes for the Hermes Agent dashboard. All themes are designed with acces
 | 011 | Nexus | Blue + Amber | Cool blue cyberpunk command center |
 | 012 | Aurora | Cyan + Gold | Electric cyan aurora command center |
 | — | Bastion | Terracotta | Military ops olive-green with terracotta accent |
+| — | Garrison | Terracotta + Blue | Bright olive command center — high-contrast, section-colored |
 | — | Lux | Cyan | Deep indigo command center with electric cyan accent |
 
 ## Accessibility Standards

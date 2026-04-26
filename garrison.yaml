@@ -1,0 +1,346 @@
+name: garrison
+label: Garrison
+description: Bright olive command center — high-contrast earth tones with warm terracotta accent
+
+# ─── Palette ──────────────────────────────────────────────────────────────────
+# Brighter than Bastion: all text passes AAA, accent passes AA
+palette:
+  background:
+    hex: "#060804"    # olive-black base
+    alpha: 1.0
+  midground: "#DDD8B8"  # bright warm cream — primary text
+  foreground:
+    hex: "#D4885C"    # bright terracotta — accent layer
+    alpha: 0.12
+  warmGlow: "rgba(212, 136, 92, 0.16)"   # warm terracotta vignette
+  noiseOpacity: 0.50
+
+# ─── Typography ───────────────────────────────────────────────────────────────
+typography:
+  fontSans: '"DM Sans", "Inter", system-ui, sans-serif'
+  fontMono: '"IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace'
+  fontDisplay: '"DM Sans", system-ui, sans-serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+  baseSize: "17px"
+  lineHeight: "1.65"
+  letterSpacing: "0.01em"
+
+# ─── Layout ───────────────────────────────────────────────────────────────────
+layout:
+  radius: "0.25rem"
+  density: compact
+
+layoutVariant: standard
+
+# ─── Color overrides ──────────────────────────────────────────────────────────
+colorOverrides:
+  primary: "#D4885C"                # bright terracotta CTA (5.80:1 AA)
+  primaryForeground: "#060804"
+  accent: "#D4885C"
+  accentForeground: "#060804"
+  ring: "#D4885C"
+  success: "#B8D4A0"                # bright sage green (10.05:1 AAA)
+  warning: "#DDD8B8"                # bright cream (11.31:1 AAA)
+  destructive: "#E09060"            # bright coral-terracotta (6.46:1 AA)
+  destructiveForeground: "#060804"
+  border: "rgba(140, 160, 120, 0.45)"   # brighter olive divider
+  input: "rgba(52, 64, 38, 0.80)"
+  muted: "rgba(28, 34, 22, 0.90)"
+  mutedForeground: "#A0B090"        # bright sage (7.06:1 AAA)
+  card: "#1C2216"
+  cardForeground: "#DDD8B8"         # bright cream (11.31:1 AAA)
+  secondary: "#344026"
+  secondaryForeground: "#B8D4A0"
+  info: "#88B4D4"                    # steel blue — sessions section accent
+  infoForeground: "#060804"
+
+# ─── Assets ───────────────────────────────────────────────────────────────────
+assets:
+  bg: "/ds-assets/011bg.png"
+
+# ─── Component chrome ─────────────────────────────────────────────────────────
+componentStyles:
+  card:
+    background: "linear-gradient(160deg, rgba(52, 64, 38, 0.92), rgba(28, 34, 22, 0.97))"
+    boxShadow: "inset 0 0 0 1px rgba(140, 160, 120, 0.40), 0 4px 20px rgba(6, 8, 4, 0.7)"
+  header:
+    background: "linear-gradient(180deg, rgba(28, 34, 22, 0.99), rgba(12, 16, 8, 0.98))"
+    boxShadow: "0 1px 0 rgba(140, 160, 120, 0.35)"
+  sidebar:
+    background: "linear-gradient(180deg, rgba(28, 34, 22, 0.99), rgba(12, 16, 8, 0.98))"
+    boxShadow: "1px 0 0 rgba(140, 160, 120, 0.30)"
+  tab:
+    clipPath: "polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)"
+  backdrop: {}
+  badge: {}
+  progress:
+    background: "rgba(52, 64, 38, 0.80)"
+  footer:
+    background: "rgba(12, 16, 8, 0.98)"
+    boxShadow: "0 -1px 0 rgba(140, 160, 120, 0.30)"
+
+# ─── Custom CSS ───────────────────────────────────────────────────────────────
+customCSS: |
+  /* ── Topographic noise overlay — terrain grid texture ─────────────────── */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(221, 216, 184, 0.012) 4px,
+        rgba(221, 216, 184, 0.012) 5px
+      ),
+      repeating-linear-gradient(
+        to right,
+        transparent 0px,
+        transparent 40px,
+        rgba(140, 160, 120, 0.04) 41px,
+        rgba(140, 160, 120, 0.04) 42px
+      );
+    mix-blend-mode: screen;
+  }
+
+  /* ── Nav active item: terracotta left bar ──────────────────────────────── */
+  [data-active="true"],
+  .nav-item[aria-current="page"] {
+    border-left: 2px solid #D4885C;
+    padding-left: calc(0.75rem - 2px);
+    background: rgba(212, 136, 92, 0.08);
+  }
+
+  /* ── Chart bars ────────────────────────────────────────────────────────── */
+  .recharts-bar-rectangle path,
+  [class*="bar-"] rect {
+    opacity: 0.9;
+  }
+
+  /* ── Table cost / positive values: bright sage ────────────────────────── */
+  td[data-col="cost"],
+  .cost-value {
+    color: #B8D4A0 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Stat numbers: bright cream highlight ──────────────────────────────── */
+  .stat-value,
+  [class*="stat-number"],
+  [class*="StatValue"] {
+    color: #F0ECD0 !important;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Card headings ────────────────────────────────────────────────────── */
+  .card-title,
+  [class*="CardTitle"] {
+    color: #F0ECD0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  /* ── Trend lines / sparklines: terracotta ─────────────────────────────── */
+  .recharts-line path,
+  [class*="sparkline"] path,
+  [class*="trend"] path {
+    stroke: #D4885C !important;
+  }
+
+  /* ── Focus rings: terracotta ──────────────────────────────────────────── */
+  *:focus-visible {
+    outline: 2px solid #D4885C;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px rgba(212, 136, 92, 0.25);
+  }
+
+  /* ── Scrollbar: olive thin ────────────────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(140, 160, 120, 0.50);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(221, 216, 184, 0.40);
+  }
+
+  /* ── Badge live pulse: terracotta ─────────────────────────────────────── */
+  .live-badge,
+  [class*="pulsing"] {
+    background: #D4885C !important;
+    box-shadow: 0 0 8px rgba(212, 136, 92, 0.6);
+  }
+
+  /* ── Selection highlight ──────────────────────────────────────────────── */
+  ::selection {
+    background: rgba(212, 136, 92, 0.30);
+    color: #F0ECD0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CONNECTED PLATFORMS — Status Strips
+     Mission-critical: connection state must be glance-and-know.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Connected: bright sage left rail + green ambient glow ────────────── */
+  .border-border:has(.text-success) {
+    border-left: 3px solid #B8D4A0 !important;
+    background: rgba(184, 212, 160, 0.06) !important;
+    box-shadow: inset 4px 0 12px rgba(184, 212, 160, 0.08);
+  }
+  .border-border:has(.text-success):hover {
+    background: rgba(184, 212, 160, 0.10) !important;
+    box-shadow: inset 4px 0 16px rgba(184, 212, 160, 0.14);
+  }
+
+  /* ── Disconnected: cream left rail + warning ambient glow ─────────────── */
+  .border-border:has(.text-warning) {
+    border-left: 3px solid #DDD8B8 !important;
+    background: rgba(221, 216, 184, 0.05) !important;
+    box-shadow: inset 4px 0 12px rgba(221, 216, 184, 0.06);
+  }
+  .border-border:has(.text-warning):hover {
+    background: rgba(221, 216, 184, 0.09) !important;
+    box-shadow: inset 4px 0 16px rgba(221, 216, 184, 0.12);
+  }
+
+  /* ── Fatal/Error: coral left rail + danger pulse ──────────────────────── */
+  .border-border:has(.text-destructive) {
+    border-left: 3px solid #E09060 !important;
+    background: rgba(224, 144, 96, 0.06) !important;
+    box-shadow: inset 4px 0 12px rgba(224, 144, 96, 0.10);
+  }
+  .border-border:has(.text-destructive):hover {
+    background: rgba(224, 144, 96, 0.12) !important;
+    box-shadow: inset 4px 0 16px rgba(224, 144, 96, 0.18);
+  }
+
+  /* ── Connected badge: enhanced glow ────────────────────────────────────── */
+  .border-border:has(.text-success) [class*="badge"],
+  .border-border:has(.text-success) .grain {
+    box-shadow: 0 0 8px rgba(184, 212, 160, 0.35);
+  }
+
+  /* ── Disconnected badge: warning emphasis ──────────────────────────────── */
+  .border-border:has(.text-warning) [class*="badge"] {
+    box-shadow: 0 0 8px rgba(221, 216, 184, 0.25);
+    font-weight: 700;
+  }
+
+  /* ── Fatal badge: danger emphasis with pulse ───────────────────────────── */
+  .border-border:has(.text-destructive) [class*="badge"] {
+    box-shadow: 0 0 8px rgba(224, 144, 96, 0.40);
+    font-weight: 700;
+    animation: platform-danger-pulse 2s infinite;
+  }
+  @keyframes platform-danger-pulse {
+    0%   { box-shadow: 0 0 4px rgba(224, 144, 96, 0.30); }
+    50%  { box-shadow: 0 0 12px rgba(224, 144, 96, 0.55); }
+    100% { box-shadow: 0 0 4px rgba(224, 144, 96, 0.30); }
+  }
+
+  /* ── Platform icon sizing ──────────────────────────────────────────────── */
+  .border-border:has(.text-success) svg,
+  .border-border:has(.text-warning) svg,
+  .border-border:has(.text-destructive) svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     RECENT SESSIONS — Blue Section Accent
+     Hue-based section identity: blue = sessions, green = platforms.
+     Uses data-section="sessions" attribute on the Card.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Sessions card header: blue accent bar ────────────────────────────── */
+  [data-section="sessions"] > div:first-child {
+    border-bottom: 1px solid rgba(136, 180, 212, 0.25);
+    background: linear-gradient(180deg, rgba(136, 180, 212, 0.04), transparent);
+  }
+
+  /* ── Sessions card header icon: blue tint ─────────────────────────────── */
+  [data-section="sessions"] svg.text-muted-foreground {
+    color: #88B4D4 !important;
+  }
+
+  /* ── Session rows: blue left rail + subtle blue ambient ───────────────── */
+  [data-section="sessions"] .border-border {
+    border-left: 3px solid rgba(136, 180, 212, 0.35) !important;
+    background: rgba(136, 180, 212, 0.03) !important;
+    transition: all 0.2s ease;
+  }
+  [data-section="sessions"] .border-border:hover {
+    border-left-color: #88B4D4 !important;
+    background: rgba(136, 180, 212, 0.07) !important;
+    box-shadow: inset 4px 0 12px rgba(136, 180, 212, 0.06);
+  }
+
+  /* ── Session row model name: blue mono text ───────────────────────────── */
+  [data-section="sessions"] .font-mono-ui {
+    color: #88B4D4;
+  }
+
+  /* ── Session badge: blue outline accent ───────────────────────────────── */
+  [data-section="sessions"] [class*="badge"] {
+    border-color: rgba(136, 180, 212, 0.30) !important;
+    color: #88B4D4 !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PLATFORMS CARD — Green Section Accent (explicit via data-section)
+     Reinforces the green identity already set by icon color classes.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Platforms card header: green accent bar ──────────────────────────── */
+  [data-section="platforms"] > div:first-child {
+    border-bottom: 1px solid rgba(184, 212, 160, 0.25);
+    background: linear-gradient(180deg, rgba(184, 212, 160, 0.04), transparent);
+  }
+
+  /* ── Platforms card header icon: green tint ────────────────────────────── */
+  [data-section="platforms"] svg.text-muted-foreground {
+    color: #B8D4A0 !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CONFIG PAGE — Clean & Comfortable
+     Complex form needs clarity, not clutter. Three touches only:
+     1. Terracotta active rail on filter sidebar
+     2. Warm accent on section divider lines
+     3. Consistent focus states
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Active filter: terracotta left rail (matches nav pattern) ─────────── */
+  [data-page="config"] aside button.bg-foreground\/10 {
+    border-left: 2px solid #D4885C;
+    padding-left: calc(0.5rem - 2px);
+    background: rgba(212, 136, 92, 0.08) !important;
+    color: #DDD8B8 !important;
+  }
+
+  /* ── Inactive filter: subtle hover warmth ──────────────────────────────── */
+  [data-page="config"] aside button:hover {
+    background: rgba(212, 136, 92, 0.04) !important;
+  }
+
+  /* ── Section divider lines: terracotta accent ──────────────────────────── */
+  [data-page="config"] .border-t.border-border {
+    border-color: rgba(212, 136, 92, 0.20) !important;
+  }
+
+  /* ── Filter panel: warm border ─────────────────────────────────────────── */
+  [data-page="config"] aside .border-border {
+    border-color: rgba(140, 160, 120, 0.35) !important;
+  }
