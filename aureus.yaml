@@ -281,37 +281,67 @@ customCSS: |
     color: #FF6B35 !important;
   }
 
-  /* ── Wave 2: Bar chart — gradient + glow + animation ────────────────────── */
+  /* ── Wave 2: Bar chart — 3D gradient bars with depth ────────────────────── */
   @keyframes barGrowUp {
     from { transform: scaleY(0); opacity: 0.4; }
     to   { transform: scaleY(1); opacity: 1; }
   }
 
+  /* Gold input bars — 3D depth effect */
   .bg-\\[\\#ffe6cb\\],
   .bg-\\[\\#ffe6cb\\]\\/70 {
-    background: linear-gradient(to top, #F5E0B0, rgba(245, 224, 176, 0.65)) !important;
-    box-shadow: 0 0 6px 1px rgba(245, 224, 176, 0.20) !important;
+    background: linear-gradient(to right,
+      rgba(180, 160, 100, 0.90),
+      #F5E0B0 20%,
+      #F5E0B0 70%,
+      rgba(180, 160, 100, 0.85)
+    ) !important;
+    border-top: 1px solid rgba(255, 240, 200, 0.50);
+    border-right: 1px solid rgba(180, 160, 100, 0.40);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      0 0 8px 2px rgba(245, 224, 176, 0.18);
     animation: barGrowUp 0.5s ease-out forwards;
     transform-origin: bottom;
     border-radius: 2px 2px 0 0;
-    transition: filter 0.2s ease;
+    transition: filter 0.2s ease, box-shadow 0.2s ease;
   }
   .bg-\\[\\#ffe6cb\\]:hover,
   .bg-\\[\\#ffe6cb\\]\\/70:hover {
     filter: brightness(1.15);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      0 0 14px 4px rgba(245, 224, 176, 0.30);
   }
 
+  /* Teal output bars — 3D depth effect */
   .bg-emerald-500,
   .bg-emerald-500\\/70 {
-    background: linear-gradient(to top, #2DD4BF, rgba(45, 212, 191, 0.65)) !important;
-    box-shadow: 0 0 6px 1px rgba(45, 212, 191, 0.20) !important;
+    background: linear-gradient(to right,
+      rgba(30, 160, 150, 0.90),
+      #2DD4BF 20%,
+      #2DD4BF 70%,
+      rgba(30, 160, 150, 0.85)
+    ) !important;
+    border-top: 1px solid rgba(100, 255, 240, 0.40);
+    border-right: 1px solid rgba(30, 160, 150, 0.35);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.20),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      0 0 8px 2px rgba(45, 212, 191, 0.18);
     animation: barGrowUp 0.5s ease-out forwards;
     transform-origin: bottom;
-    transition: filter 0.2s ease;
+    transition: filter 0.2s ease, box-shadow 0.2s ease;
   }
   .bg-emerald-500:hover,
   .bg-emerald-500\\/70:hover {
     filter: brightness(1.15);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.30),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+      0 0 14px 4px rgba(45, 212, 191, 0.30);
   }
 
   /* ── Wave 2: Chart tooltip — gold border + blur ─────────────────────────── */
