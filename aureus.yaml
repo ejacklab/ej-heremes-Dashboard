@@ -138,7 +138,7 @@ customCSS: |
 
   /* ── Chart bars: gold primary series with warm gold secondary glow ────────── */
   .recharts-wrapper .recharts-bar-rectangle path,
-  .recharts-wrapper [class*="bar-"]:not([class*="progress\"]) rect {
+  .recharts-wrapper [class*="bar-"]:not([class*="progress"]) rect {
     fill: #F5E0B0;
     filter: drop-shadow(0 0 6px rgba(245, 224, 176, 0.40));
   }
@@ -375,7 +375,6 @@ customCSS: |
   }
 
   /* ── Bar hover: brighten + intensify glow (scoped to chart column) ────── */
-  .group:hover > 
   .group:hover > [class*="bg-[#ffe6cb]/70"] {
     filter: brightness(1.15);
     box-shadow:
@@ -385,7 +384,6 @@ customCSS: |
       0 3px 14px rgba(0, 0, 0, 0.50),
       0 0 16px rgba(245, 224, 176, 0.35);
   }
-  .group:hover > 
   .group:hover > [class*="bg-emerald-500/70"] {
     filter: brightness(1.12);
     box-shadow:
